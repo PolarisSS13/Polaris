@@ -111,9 +111,9 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	src.set_dir(turn(src.dir, 90))
 	return 1
 
-/obj/structure/particle_accelerator/examine(mob/user)
+/obj/structure/particle_accelerator/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	
+
 	switch(construction_state)
 		if(0)
 			. += "Looks like it's not attached to the flooring."
@@ -290,9 +290,9 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 /obj/machinery/particle_accelerator/update_icon()
 	return
 
-/obj/machinery/particle_accelerator/examine(mob/user)
+/obj/machinery/particle_accelerator/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	
+
 	switch(construction_state)
 		if(0)
 			. += "Looks like it's not attached to the flooring."

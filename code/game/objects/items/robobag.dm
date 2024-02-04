@@ -26,7 +26,7 @@
 	stasis_level = 2	// Lower than the normal cryobag, because it's not made for meat that dies. It's made for robots and is freezing.
 	var/obj/item/clothing/accessory/medal/badge/corptag	// The tag on the bag.
 
-/obj/structure/closet/body_bag/cryobag/robobag/examine(mob/user)
+/obj/structure/closet/body_bag/cryobag/robobag/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(corptag && Adjacent(user))
 		. += "<span class='notice'>[src] has a [corptag] attached to it.</span>"

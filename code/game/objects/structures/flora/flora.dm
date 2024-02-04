@@ -36,7 +36,7 @@
 	if(randomize_harvest_count)
 		max_harvests = max(0, rand(min_harvests, max_harvests)) // Incase you want to weight it more toward 'not harvestable', set min_harvests to a negative value.
 
-/obj/structure/flora/examine(mob/user)
+/obj/structure/flora/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(harvest_count < max_harvests)
 		. += get_harvestable_desc()
@@ -277,9 +277,9 @@
 	plane = OBJ_PLANE
 	var/obj/item/stored_item
 
-/obj/structure/flora/pottedplant/examine(mob/user)
+/obj/structure/flora/pottedplant/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(in_range(user, src) && stored_item)
+	if(distance < 2 && stored_item)
 		. += "<span class='filter_notice'><i>You can see something in there...</i></span>"
 
 /obj/structure/flora/pottedplant/attackby(obj/item/I, mob/user)

@@ -80,7 +80,7 @@
 		return "nearly cooked"
 	return "cooked"
 
-/obj/item/reagent_containers/food/snacks/examine(mob/user)
+/obj/item/reagent_containers/food/snacks/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(backyard_grilling_rawness > 0 && backyard_grilling_rawness != initial(backyard_grilling_rawness))
 		. += "\The [src] is [get_backyard_grilling_text()]."
@@ -225,9 +225,9 @@
 
 	return 0
 
-/obj/item/reagent_containers/food/snacks/examine(mob/user)
+/obj/item/reagent_containers/food/snacks/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		if(coating)
 			. += "<span class='notice'>It's coated in [coating.name]!</span>"
 		if(bitecount==0)
@@ -7186,7 +7186,7 @@
 	if(!sealed)
 		unseal()
 
-/obj/item/reagent_containers/food/snacks/canned/examine(mob/user)
+/obj/item/reagent_containers/food/snacks/canned/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	to_chat(user, "It is [sealed ? "" : "un"]sealed.")
 

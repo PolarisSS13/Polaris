@@ -16,9 +16,9 @@
 	var/max_rockets = 1
 	var/list/rockets = new/list()
 
-/obj/item/gun/launcher/rocket/examine(mob/user)
+/obj/item/gun/launcher/rocket/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(distance < 3)
 		. += "<font color='blue'>[rockets.len] / [max_rockets] rockets.</font>"
 
 /obj/item/gun/launcher/rocket/attackby(obj/item/I as obj, mob/user as mob)

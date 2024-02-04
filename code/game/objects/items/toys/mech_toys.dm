@@ -197,7 +197,7 @@
 		wants_to_battle = FALSE
 		to_chat(user, "<span class='notice'>You get the feeling they don't want to battle.</span>")
 
-/obj/item/toy/mecha/examine()
+/obj/item/toy/mecha/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "<span class='notice'>This toy's special attack is [special_attack_cry], [special_attack_type_message] </span>"
 	if(in_combat)

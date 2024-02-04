@@ -223,7 +223,7 @@ var/global/list/breach_burn_descriptors = list(
 
 	..()
 
-/obj/item/clothing/suit/space/examine(mob/user)
+/obj/item/clothing/suit/space/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(can_breach && breaches?.len)
 		for(var/datum/breach/B in breaches)

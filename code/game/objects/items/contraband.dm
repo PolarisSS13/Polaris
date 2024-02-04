@@ -69,9 +69,9 @@
 	color = reagents.get_color()
 
 
-/obj/item/reagent_containers/powder/examine(mob/user)
+/obj/item/reagent_containers/powder/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if (isliving(user) && get_dist(user, src) > 2)
+	if (distance > 2 && isliving(user))
 		return
 	. += "It seems to be about [reagents.total_volume] units of [main_reagent_name]."
 

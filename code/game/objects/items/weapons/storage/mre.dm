@@ -22,7 +22,7 @@ MRE Stuff
 	/obj/item/material/kitchen/utensil/spoon/plastic
 	)
 
-/obj/item/storage/mre/examine(mob/user)
+/obj/item/storage/mre/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += meal_desc
 

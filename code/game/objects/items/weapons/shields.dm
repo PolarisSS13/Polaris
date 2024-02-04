@@ -214,7 +214,7 @@
 			lcolor = sanitize_hexcolor(energy_color_input)
 		update_icon()
 
-/obj/item/shield/energy/examine(mob/user)
+/obj/item/shield/energy/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "<span class='notice'>Alt-click to recolor it.</span>"
 

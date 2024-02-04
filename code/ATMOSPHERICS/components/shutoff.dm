@@ -14,7 +14,7 @@ GLOBAL_LIST_EMPTY(shutoff_valves)
 /obj/machinery/atmospherics/valve/shutoff/update_icon()
 	icon_state = "vclamp[open]"
 
-/obj/machinery/atmospherics/valve/shutoff/examine(var/mob/user)
+/obj/machinery/atmospherics/valve/shutoff/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "The automatic shutoff circuit is [close_on_leaks ? "enabled" : "disabled"]."
 

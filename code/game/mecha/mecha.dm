@@ -501,28 +501,21 @@
 	else
 		return 0
 
-/obj/mecha/examine(mob/user)
+/obj/mecha/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
 	var/obj/item/mecha_parts/component/armor/AC = internal_components[MECH_ARMOR]
-
 	var/obj/item/mecha_parts/component/hull/HC = internal_components[MECH_HULL]
-
 	if(AC)
 		. += "It has [AC] attached. [AC.get_efficiency()<0.5?"It is severely damaged.":""]"
 	else
 		. += "It has no armor plating."
-
 	if(HC)
 		if(!AC || AC.get_efficiency() < 0.7)
 			. += "It has [HC] attached. [HC.get_efficiency()<0.5?"It is severely damaged.":""]"
 		else
 			. += "You cannot tell what type of hull it has."
-
 	else
 		. += "It does not seem to have a completed hull."
-
-
 	var/integrity = health/initial(health)*100
 	switch(integrity)
 		if(85 to 100)

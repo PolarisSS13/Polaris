@@ -200,20 +200,8 @@
 	src.loc = T
 
 // See inventory_sizes.dm for the defines.
-/obj/item/examine(mob/user)
-	var/size
-	switch(src.w_class)
-		if(ITEMSIZE_TINY)
-			size = "tiny"
-		if(ITEMSIZE_SMALL)
-			size = "small"
-		if(ITEMSIZE_NORMAL)
-			size = "normal-sized"
-		if(ITEMSIZE_LARGE)
-			size = "bulky"
-		if(ITEMSIZE_HUGE)
-			size = "huge"
-	. = ..(user, "", "It is a [size] item.")
+/obj/item/examine(mob/user, distance, infix, suffix)
+	. = ..(user, distance, infix, "It is a [w_class_to_name(w_class)] item.")
 	if(drying_wetness > 0 && drying_wetness != initial(drying_wetness))
 		. += "\The [src] is [get_dryness_text()]."
 
@@ -979,3 +967,20 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/handle_movement(var/turf/walking, var/running)
 	return FALSE
+
+
+/// Returns the item's w_class as text.
+/proc/w_class_to_name(w_class)
+	switch (w_class)
+		if (ITEMSIZE_TINY)
+			return "tiny"
+		if (ITEMSIZE_SMALL)
+			return "small"
+		if (ITEMSIZE_NORMAL)
+			return "normal"
+		if (ITEMSIZE_LARGE)
+			return "large"
+		if (ITEMSIZE_HUGE)
+			return "huge"
+		else
+			return "buggy"

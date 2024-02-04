@@ -94,9 +94,9 @@
 /obj/item/reagent_containers/food/drinks/feed_sound(var/mob/user)
 	playsound(src, 'sound/items/drink.ogg', rand(10, 50), 1)
 
-/obj/item/reagent_containers/food/drinks/examine(mob/user)
+/obj/item/reagent_containers/food/drinks/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		if(!reagents?.total_volume)
 			. += "<span class='notice'>It is empty!</span>"
 		else if (reagents.total_volume <= volume * 0.25)

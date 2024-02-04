@@ -57,13 +57,12 @@
 	if(!anchored)
 		return
 
-/obj/machinery/power/port_gen/examine(mob/user)
+/obj/machinery/power/port_gen/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user)) //It literally has a light on the sprite, are you sure this is necessary?
-		if(active)
-			. += "<span class='notice'>The generator is on.</span>"
-		else
-			. += "<span class='notice'>The generator is off.</span>"
+	if(active)
+		. += "<span class='notice'>The generator is on.</span>"
+	else
+		. += "<span class='notice'>The generator is off.</span>"
 
 /obj/machinery/power/port_gen/emp_act(severity)
 	var/duration = 6000 //ten minutes
@@ -125,7 +124,7 @@
 	default_apply_parts()
 	if(anchored)
 		connect_to_network()
-		
+
 /obj/machinery/power/port_gen/pacman/Destroy()
 	DropFuel()
 	return ..()
@@ -145,7 +144,7 @@
 
 	power_gen = round(initial(power_gen) * (max(2, temp_rating) / 2))
 
-/obj/machinery/power/port_gen/pacman/examine(mob/user)
+/obj/machinery/power/port_gen/pacman/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "It appears to be producing [power_gen*power_output] W."
 	. += "There [sheets == 1 ? "is" : "are"] [sheets] sheet\s left in the hopper."
@@ -312,7 +311,7 @@
 	if(!ui)
 		ui = new(user, src, "PortableGenerator", name)
 		ui.open()
-	
+
 /obj/machinery/power/port_gen/pacman/tgui_data(mob/user)
 	var/list/data = list()
 
@@ -324,7 +323,7 @@
 		data["is_ai"] = TRUE
 	else
 		data["is_ai"] = FALSE
-	
+
 	data["sheet_name"] = capitalize(sheet_name)
 	data["fuel_stored"] = round((sheets * 1000) + (sheet_left * 1000))
 	data["fuel_capacity"] = round(max_sheets * 1000, 0.1)

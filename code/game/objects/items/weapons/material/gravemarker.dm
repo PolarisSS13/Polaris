@@ -36,11 +36,11 @@
 			qdel(src)
 	..()
 
-/obj/item/material/gravemarker/examine(mob/user)
+/obj/item/material/gravemarker/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(grave_name && get_dist(src, user) < 4)
+	if(grave_name && distance < 4)
 		. += "Here Lies [grave_name]"
-	if(epitaph && get_dist(src, user) < 2)
+	if(epitaph && distance < 2)
 		. += epitaph
 
 /obj/item/material/gravemarker/update_icon()

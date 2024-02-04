@@ -30,7 +30,7 @@
 	transaction_devices += src // Global reference list to be properly set up by /proc/setup_economy()
 	. = ..()
 
-/obj/machinery/cash_register/examine(mob/user as mob)
+/obj/machinery/cash_register/examine(mob/user, distance, infix, suffix)
 	. = ..(user)
 	if(transaction_amount)
 		. += "It has a purchase of [transaction_amount] pending[transaction_purpose ? " for [transaction_purpose]" : ""]."

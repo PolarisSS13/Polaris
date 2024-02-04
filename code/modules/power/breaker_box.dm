@@ -44,7 +44,7 @@
 	..()
 	set_state(1)
 
-/obj/machinery/power/breakerbox/examine(mob/user)
+/obj/machinery/power/breakerbox/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(on)
 		. += "<span class='notice'>It seems to be online.</span>"

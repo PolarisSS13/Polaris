@@ -52,9 +52,9 @@
 	QDEL_NULL(oil)
 	return ..()
 
-/obj/machinery/appliance/cooker/fryer/examine(var/mob/user)
+/obj/machinery/appliance/cooker/fryer/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		to_chat(user, "Oil Level: [oil.total_volume]/[optimal_oil]")
 
 /obj/machinery/appliance/cooker/fryer/update_icon() // We add our own version of the proc to use the special fryer double-lights.

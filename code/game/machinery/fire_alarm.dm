@@ -26,7 +26,7 @@ FIRE ALARM
 /obj/machinery/firealarm/alarms_hidden
 	alarms_hidden = TRUE
 
-/obj/machinery/firealarm/examine()
+/obj/machinery/firealarm/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "Current security level: [seclevel]"
 

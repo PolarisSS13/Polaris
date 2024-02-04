@@ -37,7 +37,7 @@
 
 	..()
 
-/obj/item/card/mining_point_card/examine(mob/user)
+/obj/item/card/mining_point_card/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "There's [mine_points] excavation points on the card."
 	. += "There's [survey_points] survey points on the card."

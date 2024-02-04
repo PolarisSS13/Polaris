@@ -40,10 +40,10 @@
 	reagents.add_reagent("water", max_water)
 	. = ..()
 
-/obj/item/extinguisher/examine(mob/user)
+/obj/item/extinguisher/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) == 0)
-		. += "[src] has [src.reagents.total_volume] units of water left!"
+	if(!distance)
+		. += "[src] has [reagents.total_volume] units of water left!"
 
 /obj/item/extinguisher/attack_self(mob/user as mob)
 	safety = !safety

@@ -134,7 +134,7 @@ GLOBAL_LIST_EMPTY(apcs)
 	var/static/list/status_overlays_lighting
 	var/static/list/status_overlays_environ
 	var/alarms_hidden = FALSE //If power alarms from this APC are visible on consoles
-	
+
 	var/nightshift_lights = FALSE
 	var/nightshift_setting = NIGHTSHIFT_AUTO
 	var/last_nightshift_switch = 0
@@ -271,9 +271,9 @@ GLOBAL_LIST_EMPTY(apcs)
 	spawn(5)
 		update()
 
-/obj/machinery/power/apc/examine(mob/user)
+/obj/machinery/power/apc/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		if(stat & BROKEN)
 			. += "This APC is broken."
 

@@ -16,9 +16,9 @@ GLOBAL_LIST_BOILERPLATE(all_mopbuckets, /obj/structure/mopbucket)
 	create_reagents(300)
 	. = ..()
 
-/obj/structure/mopbucket/examine(mob/user)
+/obj/structure/mopbucket/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "It contains [reagents.total_volume] unit\s of water!"
 
 /obj/structure/mopbucket/attackby(obj/item/I, mob/user)

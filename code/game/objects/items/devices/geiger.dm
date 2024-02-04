@@ -34,7 +34,7 @@
 	update_icon()
 	update_sound()
 
-/obj/item/geiger/examine(mob/user)
+/obj/item/geiger/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	get_radiation()
 	. += "<span class='warning'>[scanning ? "Ambient" : "Stored"] radiation level: [radiation_count ? radiation_count : "0"]Bq.</span>"

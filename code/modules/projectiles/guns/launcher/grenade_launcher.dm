@@ -35,9 +35,9 @@
 		to_chat(M, "<span class='warning'>You pump [src], but the magazine is empty.</span>")
 	update_icon()
 
-/obj/item/gun/launcher/grenade/examine(mob/user)
+/obj/item/gun/launcher/grenade/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(distance < 3)
 		var/grenade_count = grenades.len + (chambered? 1 : 0)
 		. += "Has [grenade_count] grenade\s remaining."
 		if(chambered)

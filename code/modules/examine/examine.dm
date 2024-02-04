@@ -76,25 +76,29 @@
 			stat(null,"<font color='#8A0808'><b>[description_holders["antag"]]</b></font>") //Red, malicious antag-related text
 
 //override examinate verb to update description holders when things are examined
-//mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716 for why this isn't atom/verb/examine()
-/mob/verb/examinate(atom/A as mob|obj|turf in _validate_atom(A))
+//mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716
+/mob/verb/examinate(atom/target as mob | obj | turf in _validate_atom(target))
 	set name = "Examine"
 	set category = "IC"
-
-	if((is_blind(src) || usr.stat) && !isobserver(src))
-		to_chat(src, "<span class='notice'>Something is there but you can't see it.</span>")
-		return 1
-
-	//Could be gone by the time they finally pick something
-	if(!A)
-		return 1
-
-	face_atom(A)
-	var/list/results = A.examine(src)
-	if(!results || !results.len)
+	if ((is_blind(src) || usr.stat) && !isobserver(src))
+		to_chat(src, SPAN_NOTICE("Something is there but you can't see it."))
+		return TRUE
+	if (!target)
+		return TRUE
+	var/distance = INFINITY
+	if (usr.stat == DEAD || isobserver(usr))
+		distance = 0
+	else
+		var/turf/turf1 = get_turf(src)
+		var/turf/turf2 = get_turf(target)
+		if(turf1 && turf1.z == turf2?.z)
+			distance = get_dist(turf1, turf2)
+	face_atom(target)
+	var/list/results = target.examine(src, distance)
+	if(!length(results))
 		results = list("You were unable to examine that. Tell a developer!")
 	to_chat(src, "<span class='filter_notice'>[jointext(results, "<br>")]</span>")
-	update_examine_panel(A)
+	update_examine_panel(target)
 
 /mob/proc/update_examine_panel(var/atom/A)
 	if(client)

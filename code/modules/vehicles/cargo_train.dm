@@ -195,9 +195,9 @@
 	else
 		return ..()
 
-/obj/vehicle/train/engine/examine(mob/user)
+/obj/vehicle/train/engine/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(ishuman(user) && Adjacent(user))
+	if(distance < 2 && ishuman(user))
 		. += "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
 		. += "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
 

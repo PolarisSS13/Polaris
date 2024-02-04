@@ -113,7 +113,7 @@
 	else if(choice == "Colour")
 		choose_colour()
 
-/obj/item/floor_painter/examine(mob/user)
+/obj/item/floor_painter/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "It is configured to produce the '[decal]' decal with a direction of '[paint_dir]' using [paint_colour] paint."
 

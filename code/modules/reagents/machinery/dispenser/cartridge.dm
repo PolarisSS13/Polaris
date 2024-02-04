@@ -21,7 +21,7 @@
 		var/datum/reagent/R = SSchemistry.chemical_reagents[spawn_reagent]
 		setLabel(R.name)
 
-/obj/item/reagent_containers/chem_disp_cartridge/examine(mob/user)
+/obj/item/reagent_containers/chem_disp_cartridge/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "It has a capacity of [volume] units."
 	if(reagents.total_volume <= 0)

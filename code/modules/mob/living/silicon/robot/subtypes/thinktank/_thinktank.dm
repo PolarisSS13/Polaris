@@ -72,7 +72,7 @@
 		recharging = null
 	. = ..()
 
-/mob/living/silicon/robot/platform/examine(mob/user, distance)
+/mob/living/silicon/robot/platform/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(distance <= 3)
 

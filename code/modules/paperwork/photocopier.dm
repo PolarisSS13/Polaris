@@ -21,9 +21,9 @@
 	. = ..()
 	default_apply_parts()
 
-/obj/machinery/photocopier/examine(mob/user as mob)
+/obj/machinery/photocopier/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "The screen shows there's [toner ? "[toner]" : "no"] toner left in the printer."
 
 /obj/machinery/photocopier/attack_ai(mob/user as mob)

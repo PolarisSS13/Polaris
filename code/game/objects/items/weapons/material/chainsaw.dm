@@ -113,9 +113,9 @@
 /obj/item/chainsaw/proc/get_fuel()
 	return reagents.get_reagent_amount("fuel")
 
-/obj/item/chainsaw/examine(mob/user)
+/obj/item/chainsaw/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(max_fuel && get_dist(user, src) == 0)
+	if(max_fuel && !distance)
 		. += "<span class = 'notice'>The [src] feels like it contains roughtly [get_fuel()] units of fuel left.</span>"
 
 /obj/item/chainsaw/update_icon()

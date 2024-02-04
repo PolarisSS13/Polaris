@@ -162,7 +162,7 @@
 /obj/item/spacecash/ewallet/attackby()    return  //like actual
 /obj/item/spacecash/ewallet/update_icon() return  //space cash
 
-/obj/item/spacecash/ewallet/examine(mob/user)
+/obj/item/spacecash/ewallet/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "<span class='notice'>Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth].</span>"

@@ -535,7 +535,7 @@
 	read_only = !read_only
 	to_chat(user, "You flip the write-protect tab to [read_only ? "protected" : "unprotected"].")
 
-/obj/item/disk/data/examine(mob/user)
+/obj/item/disk/data/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "The write-protect tab is set to [read_only ? "protected" : "unprotected"]."
 

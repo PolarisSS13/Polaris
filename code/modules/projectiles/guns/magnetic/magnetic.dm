@@ -123,9 +123,9 @@
 
 	return ammotext
 
-/obj/item/gun/magnetic/examine(var/mob/user)
+/obj/item/gun/magnetic/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(distance < 3)
 		. += show_ammo()
 
 		if(cell)

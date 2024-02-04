@@ -131,7 +131,7 @@
 	..(N, tell_universe, force_lighting_update, preserve_outdoors)
 
 //Appearance
-/turf/simulated/wall/examine(mob/user)
+/turf/simulated/wall/examine(mob/user, distance, infix, suffix)
 	. = ..()
 
 	if(!damage)

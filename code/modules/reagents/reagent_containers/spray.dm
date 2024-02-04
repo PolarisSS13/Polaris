@@ -78,7 +78,7 @@
 	spray_size = next_in_list(spray_size, spray_sizes)
 	to_chat(user, "<span class='notice'>You adjusted the pressure nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>")
 
-/obj/item/reagent_containers/spray/examine(mob/user)
+/obj/item/reagent_containers/spray/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(loc == user)
 		. += "[round(reagents.total_volume)] units left."
@@ -132,9 +132,9 @@
 	. = ..()
 	reagents.add_reagent("condensedcapsaicin", volume)
 
-/obj/item/reagent_containers/spray/pepper/examine(mob/user)
+/obj/item/reagent_containers/spray/pepper/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "The safety is [safety ? "on" : "off"]."
 
 /obj/item/reagent_containers/spray/pepper/attack_self(var/mob/user)

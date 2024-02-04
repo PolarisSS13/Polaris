@@ -1,4 +1,4 @@
-/obj/item/modular_computer/examine(var/mob/user)
+/obj/item/modular_computer/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(damage > broken_damage)
 		. += "<span class='danger'>It is heavily damaged!</span>"

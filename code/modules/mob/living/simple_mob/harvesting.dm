@@ -15,10 +15,10 @@
 	// Associative list of paths and their chances. path = straws in the lot
 	var/list/harvest_results
 
-/mob/living/simple_mob/examine(mob/user)
+/mob/living/simple_mob/examine(mob/user, distance, infix, suffix)
 	. = ..()
 
-	if(user && (isobserver(user) || get_dist(user, src) <= 3))
+	if(user && (isobserver(user) || distance <= 3))
 
 		var/datum/gender/G = gender_datums[get_visible_gender()]
 		if(stat == DEAD)

@@ -57,7 +57,7 @@
 		if(F != src)
 			log_debug("Duplicate firedoors at [x],[y],[z]")
 			return INITIALIZE_HINT_QDEL
-	
+
 	var/area/A = get_area(src)
 	ASSERT(istype(A))
 
@@ -78,15 +78,12 @@
 /obj/machinery/door/firedoor/get_material()
 	return get_material_by_name(DEFAULT_WALL_MATERIAL)
 
-/obj/machinery/door/firedoor/examine(mob/user)
+/obj/machinery/door/firedoor/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	
-	if(!Adjacent(user))
+	if(distance > 1)
 		return .
-
 	if(pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
 		. += "<span class='warning'>WARNING: Current pressure differential is [pdiff]kPa! Opening door may result in injury!</span>"
-
 	. += "<b>Sensor readings:</b>"
 	for(var/index = 1; index <= tile_info.len; index++)
 		var/o = "&nbsp;&nbsp;"

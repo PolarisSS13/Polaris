@@ -215,7 +215,7 @@ var/global/list/pre_init_created_atoms // atom creation ordering means some stuf
 /atom/proc/get_examine_desc()
 	return desc
 
-/atom/proc/examine(mob/user, infix = "", suffix = "")
+/atom/proc/examine(mob/user, distance, infix = "", suffix = "")
 	var/f_name = "\a [src][infix]."
 	if (blood_DNA && !istype(src, /obj/effect/decal))
 		if (gender == PLURAL)

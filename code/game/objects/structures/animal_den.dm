@@ -113,7 +113,7 @@
 	. = ..()
 	name = "den" // to remove mapping identifiers.
 
-/obj/structure/animal_den/ghost_join/examine(mob/user, infix, suffix)
+/obj/structure/animal_den/ghost_join/examine(mob/user, distance, infix, suffix)
 	var/list/output = ..()
 	if(isobserver(user))
 		if(critter)

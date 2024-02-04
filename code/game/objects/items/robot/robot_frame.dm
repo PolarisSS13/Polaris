@@ -14,7 +14,7 @@
 	var/created_name = ""
 	var/product = /mob/living/silicon/robot
 
-/obj/item/robot_parts/frame/examine(mob/user)
+/obj/item/robot_parts/frame/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(check_completion())
 		. += SPAN_NOTICE("It is ready to receive a controlling intelligence.")

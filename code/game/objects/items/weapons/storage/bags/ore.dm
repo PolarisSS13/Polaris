@@ -16,9 +16,9 @@
 	var/stored_ore
 
 
-/obj/item/storage/bag/ore/examine(mob/user)
+/obj/item/storage/bag/ore/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if (!Adjacent(user) && !isobserver(user))
+	if (distance > 1 && !isobserver(user))
 		return
 	if (isliving(user))
 		add_fingerprint(user)

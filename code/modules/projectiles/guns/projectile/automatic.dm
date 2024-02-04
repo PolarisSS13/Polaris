@@ -196,7 +196,7 @@
 	if(!ignore_inhands) update_held_icon()
 	return
 
-/obj/item/gun/projectile/automatic/z8/examine(mob/user)
+/obj/item/gun/projectile/automatic/z8/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(launcher.chambered)
 		. += "\The [launcher] has \a [launcher.chambered] loaded."

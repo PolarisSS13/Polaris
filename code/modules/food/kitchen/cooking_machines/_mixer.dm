@@ -15,9 +15,9 @@ fundamental differences
 	idle_power_usage = 50
 	var/datum/looping_sound/mixer/mixer_loop
 
-/obj/machinery/appliance/mixer/examine(var/mob/user)
+/obj/machinery/appliance/mixer/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "<span class='notice'>It is currently set to make a [selected_option]</span>"
 
 /obj/machinery/appliance/mixer/Initialize()

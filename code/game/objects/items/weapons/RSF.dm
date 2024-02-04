@@ -33,9 +33,9 @@ RSF
 
 	w_class = ITEMSIZE_NORMAL
 
-/obj/item/rsf/examine(mob/user)
+/obj/item/rsf/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) == 0)
+	if(!distance)
 		. += "<span class='notice'>It currently holds [stored_matter]/30 fabrication-units.</span>"
 
 /obj/item/rsf/attackby(obj/item/W as obj, mob/user as mob)

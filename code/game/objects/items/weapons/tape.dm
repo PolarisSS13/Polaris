@@ -124,8 +124,8 @@
 	var/obj/item/stuck = null
 
 
-/obj/item/ducttape/examine(mob/user)
-	return stuck.examine(user)
+/obj/item/ducttape/examine(mob/user, distance, infix, suffix)
+	return stuck.examine(user, distance, infix, suffix)
 
 /obj/item/ducttape/proc/attach(var/obj/item/W)
 	stuck = W

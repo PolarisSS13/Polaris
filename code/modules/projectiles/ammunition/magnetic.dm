@@ -9,7 +9,7 @@
 	var/remaining = 9
 	preserve_item = 1
 
-/obj/item/magnetic_ammo/examine(mob/user)
+/obj/item/magnetic_ammo/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "There [(remaining == 1)? "is" : "are"] [remaining] flechette\s left!"
 

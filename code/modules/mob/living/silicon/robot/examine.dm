@@ -1,6 +1,6 @@
-/mob/living/silicon/robot/examine(mob/user)
-	var/custom_infix = custom_name ? ", [modtype] [braintype]" : ""
-	. = ..(user, infix = custom_infix)
+/mob/living/silicon/robot/examine(mob/user, distance, infix, suffix)
+	var/custom_infix = custom_name ? ", [modtype] [braintype]" : infix
+	. = ..(user, distance, custom_infix, suffix)
 
 	if (src.getBruteLoss())
 		if (src.getBruteLoss() < 75)

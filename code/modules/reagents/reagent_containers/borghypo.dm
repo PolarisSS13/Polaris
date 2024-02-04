@@ -117,9 +117,9 @@
 			var/datum/reagent/R = SSchemistry.chemical_reagents[reagent_ids[mode]]
 			to_chat(usr, "<span class='notice'>Synthesizer is now producing '[R.name]'.</span>")
 
-/obj/item/reagent_containers/borghypo/examine(mob/user)
+/obj/item/reagent_containers/borghypo/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(distance < 3)
 		var/datum/reagent/R = SSchemistry.chemical_reagents[reagent_ids[mode]]
 		. += "<span class='notice'>It is currently producing [R.name] and has [reagent_volumes[reagent_ids[mode]]] out of [volume] units left.</span>"
 

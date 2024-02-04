@@ -32,11 +32,11 @@
 /obj/item/material/fishing_rod/built
 	strung = FALSE
 
-/obj/item/material/fishing_rod/examine(mob/user)
+/obj/item/material/fishing_rod/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(Bait)
 		. += "<span class='notice'>It has [Bait] hanging on its hook: </span>"
-		. += Bait.examine(user)
+		. += Bait.examine(user, distance, infix, suffix)
 
 /obj/item/material/fishing_rod/CtrlClick(mob/user)
 	if((src.loc == user || Adjacent(user)) && Bait)

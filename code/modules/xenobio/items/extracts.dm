@@ -32,7 +32,7 @@
 		qdel(O)
 	..()
 
-/obj/item/slime_extract/examine(mob/user)
+/obj/item/slime_extract/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(uses)
 		. += "This extract has [uses] more use\s."

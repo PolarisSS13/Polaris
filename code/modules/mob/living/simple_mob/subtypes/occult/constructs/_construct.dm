@@ -132,7 +132,7 @@
 		return
 	return ..()
 
-/mob/living/simple_mob/construct/examine(mob/user)
+/mob/living/simple_mob/construct/examine(mob/user, distance, infix, suffix)
 	. = ..(user)
 	var/max = getMaxHealth()
 	if (health < max)

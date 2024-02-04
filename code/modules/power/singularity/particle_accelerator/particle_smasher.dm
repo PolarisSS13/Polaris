@@ -36,9 +36,9 @@
 	recipes.Cut()
 	..()
 
-/obj/machinery/particle_smasher/examine(mob/user)
+/obj/machinery/particle_smasher/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "<span class='notice'>\The [src] contains:</span>"
 		for(var/obj/item/I in contents)
 			. += "<span class='notice'>\the [I]</span>"

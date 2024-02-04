@@ -33,15 +33,15 @@
 /obj/item/pinpointer/process()
 	if(!active)
 		return PROCESS_KILL
-	
+
 	if(!the_disk)
 		the_disk = locate()
 		if(!the_disk)
 			icon_state = "pinonnull"
 			return
-	
+
 	set_dir(get_dir(src,the_disk))
-	
+
 	switch(get_dist(src,the_disk))
 		if(0)
 			icon_state = "pinondirect"
@@ -52,7 +52,7 @@
 		if(16 to INFINITY)
 			icon_state = "pinonfar"
 
-/obj/item/pinpointer/examine(mob/user)
+/obj/item/pinpointer/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	for(var/obj/machinery/nuclearbomb/bomb in machines)
 		if(bomb.timing)
@@ -299,10 +299,10 @@
 
 	if(loc.z != our_shuttle.z)	//If you are on a different z-level from the shuttle
 		icon_state = "pinonnull"
-	
+
 	else
 		set_dir(get_dir(src, our_shuttle))
-	
+
 		switch(get_dist(src, our_shuttle))
 			if(0)
 				icon_state = "pinondirect"

@@ -191,9 +191,9 @@
 		icon_state = "envelope_empty"
 
 
-/obj/item/folder/envelope/examine(mob/user)
+/obj/item/folder/envelope/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if (get_dist(src, user) > 3 && !isobserver(user))
+	if (distance > 3 && !isobserver(user))
 		return
 	if (envelope_seal)
 		. += "It has an [SPAN_NOTICE("intact [envelope_seal] seal")]."

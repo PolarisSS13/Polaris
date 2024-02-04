@@ -27,7 +27,7 @@
 	QDEL_NULL(ion_trail)
 	return ..()
 
-/obj/item/tank/jetpack/examine(mob/user)
+/obj/item/tank/jetpack/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(air_contents.total_moles < 5)
 		. += "<span class='danger'>The meter on \the [src] indicates you are almost out of gas!</span>"
@@ -118,7 +118,7 @@
 	name = "jetpack"
 	var/obj/item/rig/holder
 
-/obj/item/tank/jetpack/rig/examine()
+/obj/item/tank/jetpack/rig/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "It's a jetpack. If you can see this, report it on the bug tracker."
 

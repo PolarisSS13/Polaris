@@ -209,9 +209,9 @@
 		else
 			playsound(src, 'sound/machines/defib_safetyOff.ogg', 75, 0)
 
-/obj/item/shield_projector/examine(var/mob/user)
+/obj/item/shield_projector/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "Its shield matrix is at [round( (shield_health / max_shield_health) * 100, 0.01)]% strength."
 
 /obj/item/shield_projector/emp_act(var/severity)

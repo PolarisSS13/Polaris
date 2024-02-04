@@ -635,7 +635,7 @@
 	else if(dead)
 		remove_dead(user)
 
-/obj/machinery/portable_atmospherics/hydroponics/examine(mob/user)
+/obj/machinery/portable_atmospherics/hydroponics/examine(mob/user, distance, infix, suffix)
 	. = ..()
 
 	if(seed)
@@ -643,8 +643,8 @@
 	else
 		. += "It is empty."
 
-	if(!Adjacent(user))
-		return .
+	if(distance > 2)
+		return
 
 	. += "Water: [round(waterlevel,0.1)]/100"
 	. += "Nutrient: [round(nutrilevel,0.1)]/10"

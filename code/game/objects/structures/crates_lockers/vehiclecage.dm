@@ -8,7 +8,7 @@
 	var/my_vehicle_type
 	var/paint_color = "#666666"
 
-/obj/structure/vehiclecage/examine(mob/user)
+/obj/structure/vehiclecage/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(my_vehicle)
 		. += "<span class='notice'>It seems to contain \the [my_vehicle].</span>"

@@ -30,11 +30,11 @@
 
 	var/force_holder = null //
 
-/obj/item/gripper/examine(mob/user)
+/obj/item/gripper/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(wrapped)
 		. += "<span class='notice'>\The [src] is holding \the [wrapped].</span>"
-		. += wrapped.examine(user)
+		. += wrapped.examine(user, distance, infix, suffix)
 
 /obj/item/gripper/CtrlClick(mob/user)
 	drop_item()

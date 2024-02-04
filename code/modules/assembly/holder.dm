@@ -16,13 +16,13 @@
 /obj/item/assembly_holder/proc/attach(var/obj/item/assembly/D, var/obj/item/assembly/D2, var/mob/user)
 	if(!D || !D2)
 		return FALSE
-	
+
 	if(!istype(D) || !istype(D2))
 		return FALSE
 
 	if(D.secured || D2.secured)
 		return FALSE
-	
+
 	if(user)
 		user.remove_from_mob(D)
 		user.remove_from_mob(D2)
@@ -55,9 +55,9 @@
 	if(master)
 		master.update_icon()
 
-/obj/item/assembly_holder/examine(mob/user)
+/obj/item/assembly_holder/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if ((in_range(src, user) || src.loc == user))
+	if (distance < 2)
 		if (src.secured)
 			. += "\The [src] is ready!"
 		else

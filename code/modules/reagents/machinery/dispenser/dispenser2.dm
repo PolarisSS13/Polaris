@@ -25,7 +25,7 @@
 		for(var/type in spawn_cartridges)
 			add_cartridge(new type(src))
 
-/obj/machinery/chemical_dispenser/examine(mob/user)
+/obj/machinery/chemical_dispenser/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "It has [cartridges.len] cartridges installed, and has space for [DISPENSER_MAX_CARTRIDGES - cartridges.len] more."
 
@@ -133,7 +133,7 @@
 	data["amount"] = amount
 	data["isBeakerLoaded"] = container ? 1 : 0
 	data["glass"] = accept_drinking
-	
+
 	var/beakerContents[0]
 	if(container && container.reagents && container.reagents.reagent_list.len)
 		for(var/datum/reagent/R in container.reagents.reagent_list)

@@ -95,9 +95,9 @@
 	var/num_stored_bags = 10
 	var/obj/item/evidencebag/filled_bag
 
-/obj/item/core_sampler/examine(var/mob/user)
+/obj/item/core_sampler/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(distance < 3)
 		. += "<span class='notice'>Used to extract geological core samples - this one is [sampled_turf ? "full" : "empty"], and has [num_stored_bags] bag[num_stored_bags != 1 ? "s" : ""] remaining.</span>"
 
 /obj/item/core_sampler/attackby(var/obj/item/I, var/mob/living/user)

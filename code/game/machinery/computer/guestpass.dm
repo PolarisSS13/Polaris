@@ -18,7 +18,7 @@
 	else
 		return temp_access
 
-/obj/item/card/id/guest/examine(mob/user)
+/obj/item/card/id/guest/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if (world.time < expiration_time)
 		. += "<span class='notice'>This pass expires at [worldtime2stationtime(expiration_time)].</span>"

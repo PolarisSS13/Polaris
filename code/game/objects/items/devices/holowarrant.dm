@@ -13,11 +13,11 @@
 	var/datum/data/record/warrant/active
 
 //look at it
-/obj/item/holowarrant/examine(mob/user)
+/obj/item/holowarrant/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(active)
 		. += "It's a holographic warrant for '[active.fields["namewarrant"]]'."
-	if(in_range(user, src) || istype(user, /mob/observer/dead))
+	if(distance < 2 || istype(user, /mob/observer/dead))
 		show_content(user) //Opens a browse window, not chatbox related
 	else
 		. += "<span class='notice'>You have to go closer if you want to read it.</span>"

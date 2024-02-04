@@ -11,7 +11,7 @@
 	max_amount = 20
 	stacktype = "hairlesshide"
 
-/obj/item/stack/hairlesshide/examine(var/mob/user)
+/obj/item/stack/hairlesshide/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += description_info
 

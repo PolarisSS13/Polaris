@@ -84,7 +84,7 @@
 	if(!BB)
 		icon_state = "[initial(icon_state)]-spent"
 
-/obj/item/ammo_casing/examine(mob/user)
+/obj/item/ammo_casing/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if (!BB)
 		. += "This one is spent."
@@ -217,7 +217,7 @@
 				break
 		icon_state = (new_state)? new_state : initial(icon_state)
 
-/obj/item/ammo_magazine/examine(mob/user)
+/obj/item/ammo_magazine/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "There [(stored_ammo.len == 1)? "is" : "are"] [stored_ammo.len] round\s left!"
 
@@ -245,4 +245,3 @@
 
 	magazine_icondata_keys["[M.type]"] = icon_keys
 	magazine_icondata_states["[M.type]"] = ammo_states
-

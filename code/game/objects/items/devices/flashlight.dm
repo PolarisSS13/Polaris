@@ -82,7 +82,7 @@
 		icon_state = "[initial(icon_state)]"
 		set_light(0)
 
-/obj/item/flashlight/examine(mob/user)
+/obj/item/flashlight/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(power_use && brightness_level)
 		. += "\The [src] is set to [brightness_level]."

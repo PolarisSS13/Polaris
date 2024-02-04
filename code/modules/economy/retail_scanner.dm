@@ -59,7 +59,7 @@
 		user.set_machine(src)
 		interact(user)
 
-/obj/item/retail_scanner/examine(mob/user as mob)
+/obj/item/retail_scanner/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(transaction_amount)
 		. += "It has a purchase of [transaction_amount] pending[transaction_purpose ? " for [transaction_purpose]" : ""]."

@@ -31,9 +31,9 @@
 	var/mining_points = 0	// For redeeming at mining equipment vendors
 	var/survey_points = 0	// For redeeming at explorer equipment vendors.
 
-/obj/item/card/id/examine(mob/user)
+/obj/item/card/id/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(in_range(user, src))
+	if(distance < 2)
 		show_tgui(user)
 	else
 		. += "<span class='warning'>It is too far away to read.</span>"

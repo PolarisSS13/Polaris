@@ -10,7 +10,7 @@
 	w_class = ITEMSIZE_SMALL
 	var/repair_amount = 5
 	var/repair_time = 40
-	
+
 /obj/item/whetstone/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/stack/material))
 		var/obj/item/stack/material/M = I
@@ -40,7 +40,7 @@
 	var/sharpen_time = 100
 	var/uses = 0
 
-/obj/item/material/sharpeningkit/examine(mob/user, distance)
+/obj/item/material/sharpeningkit/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "There [uses == 1 ? "is" : "are"] [uses] [material] [uses == 1 ? src.material.sheet_singular_name : src.material.sheet_plural_name] left for use."
 
@@ -75,4 +75,4 @@
 			to_chat(user, "Not enough material to sharpen [M]. You need [M.w_class*2] [M.material.sheet_plural_name].")
 			return
 	else
-		to_chat(user, "You can't sharpen [W] with [src]!") 
+		to_chat(user, "You can't sharpen [W] with [src]!")

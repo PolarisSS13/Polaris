@@ -90,10 +90,9 @@
 	else
 		set_light(0)
 
-/obj/item/melee/baton/examine(mob/user)
+/obj/item/melee/baton/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
-	if(Adjacent(user, src))
+	if(distance < 2)
 		if(bcell)
 			. += "<span class='notice'>The baton is [round(bcell.percent())]% charged.</span>"
 		if(!bcell)

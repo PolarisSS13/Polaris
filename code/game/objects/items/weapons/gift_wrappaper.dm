@@ -166,9 +166,9 @@
 	return
 
 
-/obj/item/wrapping_paper/examine(mob/user)
+/obj/item/wrapping_paper/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "There is about [src.amount] square units of paper left!"
 
 /obj/item/wrapping_paper/attack(mob/target as mob, mob/user as mob)

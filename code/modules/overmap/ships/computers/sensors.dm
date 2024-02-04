@@ -164,7 +164,7 @@
 		icon_state = "sensors_off"
 	..()
 
-/obj/machinery/shipsensors/examine(mob/user)
+/obj/machinery/shipsensors/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(health <= 0)
 		. += "<span class='danger'>It is wrecked.</span>"

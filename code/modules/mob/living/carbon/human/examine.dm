@@ -1,11 +1,11 @@
-/mob/living/carbon/human/examine(mob/user)
+/mob/living/carbon/human/examine(mob/user, distance, infix, suffix)
 	// . = ..() //Note that we don't call parent. We build the list by ourselves.
 
 	var/skip_gear = 0
 	var/skip_body = 0
 
 	if(alpha <= EFFECTIVE_INVIS)
-		return src.loc.examine(user) // Returns messages as if they examined wherever the human was
+		return loc.examine(user, distance, infix, suffix) // Returns messages as if they examined wherever the human was
 
 	var/looks_synth = looksSynthetic()
 

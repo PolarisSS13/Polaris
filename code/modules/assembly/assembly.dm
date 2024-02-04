@@ -81,9 +81,9 @@
 /obj/item/assembly/process()
 	return PROCESS_KILL
 
-/obj/item/assembly/examine(mob/user)
+/obj/item/assembly/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if((in_range(src, user) || loc == user))
+	if(distance < 2)
 		if(secured)
 			. += "\The [src] is ready!"
 		else

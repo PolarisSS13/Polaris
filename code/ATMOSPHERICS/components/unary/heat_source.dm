@@ -156,7 +156,7 @@
 
 	..()
 
-/obj/machinery/atmospherics/unary/heater/examine(mob/user)
+/obj/machinery/atmospherics/unary/heater/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(panel_open)
 		. += "The maintenance hatch is open."

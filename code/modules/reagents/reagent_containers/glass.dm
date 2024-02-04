@@ -60,9 +60,9 @@
 	base_name = name
 	base_desc = desc
 
-/obj/item/reagent_containers/glass/examine(var/mob/user)
+/obj/item/reagent_containers/glass/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(distance < 3)
 		if(reagents && reagents.reagent_list.len)
 			. += "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>"
 		else
@@ -362,7 +362,7 @@
 	QDEL_NULL(holding)
 	return ..()
 
-/obj/item/reagent_containers/glass/bucket/examine(mob/user)
+/obj/item/reagent_containers/glass/bucket/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(loc == user && holding)
 		. += "There is \a [holding] in \the [src]."

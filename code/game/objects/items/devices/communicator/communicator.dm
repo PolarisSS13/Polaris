@@ -112,9 +112,9 @@ var/global/list/obj/item/communicator/all_communicators = list()
 // Proc: examine()
 // Parameters: user - the user doing the examining
 // Description: Allows the user to click a link when examining to look at video if one is going.
-/obj/item/communicator/examine(mob/user)
+/obj/item/communicator/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user) && video_source)
+	if(distance < 2 && video_source)
 		. += "<span class='notice'>It looks like it's on a video call: <a href='?src=\ref[src];watchvideo=1'>\[view\]</a></span>"
 
 // Proc: initialize_exonet()
@@ -135,12 +135,10 @@ var/global/list/obj/item/communicator/all_communicators = list()
 // Proc: examine()
 // Parameters: 1 (user - the person examining the device)
 // Description: Shows all the voice mobs inside the device, and their status.
-/obj/item/communicator/examine(mob/user)
+/obj/item/communicator/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
 	for(var/mob/living/voice/voice in contents)
 		. += "<span class='notice'>On the screen, you can see a image feed of [voice].</span>"
-
 		if(voice && voice.key)
 			switch(voice.stat)
 				if(CONSCIOUS)

@@ -39,9 +39,9 @@
 
 	. = ..()
 
-/obj/structure/reagent_dispensers/examine(mob/user)
+/obj/structure/reagent_dispensers/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(distance < 3)
 		. += "<span class='notice'>It contains:</span>"
 		if(reagents && reagents.reagent_list.len)
 			for(var/datum/reagent/R in reagents.reagent_list)
@@ -114,9 +114,9 @@
 	. = ..()
 	reagents.add_reagent("fuel",1000)
 
-/obj/structure/reagent_dispensers/fueltank/examine(mob/user)
+/obj/structure/reagent_dispensers/fueltank/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(distance < 3)
 		if(modded)
 			. += "<span class='warning'>Fuel faucet is wrenched open, leaking the fuel!</span>"
 		if(rig)
@@ -248,7 +248,7 @@
 		reagents.add_reagent("water",120)
 	update_icon()
 
-/obj/structure/reagent_dispensers/water_cooler/examine(mob/user)
+/obj/structure/reagent_dispensers/water_cooler/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(cupholder)
 		. += "<span class='notice'>There are [cups] cups in the cup dispenser.</span>"

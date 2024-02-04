@@ -81,10 +81,10 @@
 	headline =   pick(tabloid_headlines)
 	name =       pick(tabloid_publishers)
 
-/obj/item/tabloid/examine(mob/user, distance)
+/obj/item/tabloid/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(headline)
-		to_chat(user, "The headline screams, \"[headline]\"")
+		. += "The headline screams, \"[headline]\""
 
 /obj/item/tabloid/attack_self(mob/user)
 	user.visible_message(SPAN_NOTICE("\The [user] leafs idly through \the [src]."))

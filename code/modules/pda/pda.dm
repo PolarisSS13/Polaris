@@ -62,9 +62,9 @@ var/global/list/obj/item/pda/PDAs = list()
 	var/list/notifying_programs = list()
 	var/retro_mode = 0
 
-/obj/item/pda/examine(mob/user)
+/obj/item/pda/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "The time [stationtime2text()] is displayed in the corner of the screen."
 
 /obj/item/pda/CtrlClick()

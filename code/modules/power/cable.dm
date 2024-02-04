@@ -110,7 +110,7 @@ var/global/list/possible_cable_coil_colours = list(
 	cable_list -= src							//remove it from global cable list
 	return ..()									// then go ahead and delete the cable
 
-/obj/structure/cable/examine(mob/user)
+/obj/structure/cable/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(isobserver(user))
 		. += "<span class='warning'>[powernet?.avail > 0 ? "[DisplayPower(powernet.avail)] in power network." : "The cable is not powered."]</span>"
@@ -966,10 +966,10 @@ var/global/list/possible_cable_coil_colours = list(
 /obj/item/stack/cable_coil/alien/update_wclass()
 	return 0
 
-/obj/item/stack/cable_coil/alien/examine(mob/user)
+/obj/item/stack/cable_coil/alien/examine(mob/user, distance, infix, suffix)
 	. = ..()
 
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "It doesn't seem to have a beginning, or an end."
 
 /obj/item/stack/cable_coil/alien/attack_hand(mob/user as mob)

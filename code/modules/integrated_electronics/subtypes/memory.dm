@@ -18,7 +18,7 @@
 	complexity = number_of_pins
 	. = ..()
 
-/obj/item/integrated_circuit/memory/examine(mob/user)
+/obj/item/integrated_circuit/memory/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	var/i
 	for(i = 1, i <= outputs.len, i++)

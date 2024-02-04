@@ -78,7 +78,7 @@
 		qdel(O)
 	..()
 
-/obj/item/reagent_containers/food/snacks/csandwich/examine(mob/user)
+/obj/item/reagent_containers/food/snacks/csandwich/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(contents.len)
 		var/obj/item/O = pick(contents)

@@ -37,7 +37,7 @@
 	SSpersistence.forget_value(src, /datum/persistent/graffiti)
 	. = ..()
 
-/obj/effect/decal/writing/examine(mob/user)
+/obj/effect/decal/writing/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	to_chat(user,  "It reads \"[message]\".")
 

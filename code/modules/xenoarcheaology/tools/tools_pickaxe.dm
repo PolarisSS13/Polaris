@@ -197,6 +197,6 @@
 		if(25 to 30)
 			icon_state = "excavationdrill5" //The other 2 sprites are comically long. Let's just cut it at 5.
 
-/obj/item/pickaxe/excavationdrill/examine(mob/user)
+/obj/item/pickaxe/excavationdrill/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "<span class='info'>It is currently set at [excavation_amount]cms.</span>"

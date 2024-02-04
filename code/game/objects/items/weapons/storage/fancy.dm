@@ -27,16 +27,16 @@
 	icon_state = "[icon_type]box[total_contents]"
 	return
 
-/obj/item/storage/fancy/examine(mob/user)
+/obj/item/storage/fancy/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
-	if(Adjacent(user))
-		if(!contents.len)
+	if(distance < 2)
+		var/len = length(contents)
+		if(!len)
 			. += "There are no [icon_type]s left in the box."
-		else if(contents.len == 1)
+		else if(len == 1)
 			. += "There is one [icon_type] left in the box."
 		else
-			. += "There are [contents.len] [icon_type]s in the box."
+			. += "There are [len] [icon_type]\s in the box."
 
 /*
  * Egg Box

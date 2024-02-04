@@ -34,9 +34,9 @@
 	else
 		cut_overlays()
 
-/obj/machinery/cell_charger/examine(mob/user)
+/obj/machinery/cell_charger/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 5)
+	if(distance <= 5)
 		. += "[charging ? "[charging]" : "Nothing"] is in [src]."
 		if(charging)
 			. += "Current charge: [charging.charge] / [charging.maxcharge]"

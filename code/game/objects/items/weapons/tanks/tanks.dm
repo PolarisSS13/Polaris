@@ -90,9 +90,9 @@ var/global/list/tank_gauge_cache = list()
 	// This could be optimized more, but it's a start!
 	START_PROCESSING(SSobj, src) // This has a built in safety to avoid multi-processing
 
-/obj/item/tank/examine(mob/user)
+/obj/item/tank/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(loc == user)
+	if(distance < 2)
 		var/celsius_temperature = air_contents.temperature - T0C
 		var/descriptive
 		switch(celsius_temperature)

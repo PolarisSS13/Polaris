@@ -575,9 +575,9 @@
 	icon_state = "watch"
 	slot_flags = SLOT_GLOVES | SLOT_TIE
 
-/obj/item/clothing/accessory/watch/examine(mob/user)
+/obj/item/clothing/accessory/watch/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "The watch shows that the time is [stationtime2text()]."
 
 /obj/item/clothing/accessory/watch/silver

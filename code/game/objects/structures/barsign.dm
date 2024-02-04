@@ -15,7 +15,7 @@
 	if(initial)
 		. -= "Off"
 
-/obj/structure/sign/double/barsign/examine(mob/user)
+/obj/structure/sign/double/barsign/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	switch(icon_state)
 		if("Off")

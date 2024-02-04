@@ -5,7 +5,7 @@
 	. = ..()
 	seeds = rand(1, 2)
 
-/obj/item/reagent_containers/food/snacks/grown/sif/examine(mob/user)
+/obj/item/reagent_containers/food/snacks/grown/sif/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(seeds)
 		. += SPAN_NOTICE("You can see [seeds] seed\s in \the [src]. You might be able to extract them with a sharp object.")

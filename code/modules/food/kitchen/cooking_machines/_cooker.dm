@@ -14,7 +14,7 @@
 	mobdamagetype = BURN
 	can_burn_food = TRUE
 
-/obj/machinery/appliance/cooker/examine(var/mob/user)
+/obj/machinery/appliance/cooker/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(.)	//no need to duplicate adjacency check
 		if(!stat)

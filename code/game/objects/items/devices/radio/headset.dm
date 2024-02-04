@@ -39,9 +39,8 @@
 /obj/item/radio/headset/list_channels(var/mob/user)
 	return list_secure_channels()
 
-/obj/item/radio/headset/examine(mob/user)
+/obj/item/radio/headset/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
 	if(radio_desc && Adjacent(user))
 		. += "The following channels are available:"
 		. += radio_desc

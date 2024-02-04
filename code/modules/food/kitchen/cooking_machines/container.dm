@@ -27,7 +27,7 @@
 	atom_flags |= ATOM_REAGENTS_IS_OPEN | ATOM_REAGENTS_SKIP_REACTIONS
 
 
-/obj/item/reagent_containers/cooking_container/examine(var/mob/user)
+/obj/item/reagent_containers/cooking_container/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if (contents.len)
 		var/string = "It contains....</br>"

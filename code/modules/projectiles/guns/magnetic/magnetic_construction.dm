@@ -87,9 +87,9 @@
 		construction_stage++
 	icon_state = "coilgun_construction_[construction_stage]"
 
-/obj/item/coilgun_assembly/examine(var/mob/user)
+/obj/item/coilgun_assembly/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(distance < 3)
 		switch(construction_stage)
 			if(2)
 				. += "<span class='notice'>It has a metal frame loosely shaped around the stock.</span>"
