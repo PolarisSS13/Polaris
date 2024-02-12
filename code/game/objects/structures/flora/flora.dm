@@ -512,7 +512,7 @@
 	name = "Sivian Flora - Eyebulbs"
 	desc = "A plant native to Sif. On the end of its stems are bulbs which visually resemble \
 	eyes, which shrink when touched. One theory is that the bulbs are a result of mimicry, appearing as eyeballs to protect from predators.<br><br>\
-	These plants have no known use."
+	Though bitter, these plants are safe to eat and have niche medicinal uses."
 	value = CATALOGUER_REWARD_EASY
 
 /obj/structure/flora/sif/eyes
@@ -530,10 +530,13 @@
 	. = ..()
 
 /datum/category_item/catalogue/flora/mosstendrils
-	name = "Sivian Flora - Moss Stalks"
-	desc = "A plant native to Sif. The plant is most closely related to the common, dense moss found covering Sif's terrain. \
-	It has evolved a method of camouflage utilizing white hairs on its dorsal sides to make it appear as a small mound of snow from \
-	above. It has no known use, though it is a common furnishing in contemporary homes."
+	name = "Sivian Flora - Wabback Stalks"
+	desc = "A plant native to Sif. Wabback is most closely related to the common, dense moss found covering Sif's terrain. It has \
+	evolved a method of camouflage utilizing white hairs on its dorsal sides to make it appear as a small mound of snow from above. \
+	<br><br>\
+	Hardy, versatile, and able to grow in nearly any conditions, wabback has been cultivated and used in the production of \
+	textiles, moonshine, and a variety of Sivian cuisine. Though the white, tuber-like portions of the plant are edible \
+	(and quite popular grilled), it sometimes becomes contaminated with serotropic toxins, causing the plant to blacken."
 	value = CATALOGUER_REWARD_TRIVIAL
 
 /obj/structure/flora/sif/tendrils
@@ -565,8 +568,10 @@
 	or the homes of the wealthy, the plant's unique vein structure is actually used to carry the plant's reproductive material \
 	to forming buds, the petals of which secrete the luminescent sap containing the pollen at the time of blooming. Certain \
 	horticulturists have found ways of halting this process prior to the secretion of the sap, leaving the flower's petals \
-	bright, at the cost of making that bud sterile."
-	value = CATALOGUER_REWARD_MEDIUM
+	bright, at the cost of making that bud sterile. \
+	<br><br>\
+	Hallucinogenic and mildly toxic, frostbelle buds nonetheless have a variety of medicinal uses when properly processed."
+	value = CATALOGUER_REWARD_EASY
 
 /obj/structure/flora/sif/frostbelle
 	name = "frostbelle shrub"
