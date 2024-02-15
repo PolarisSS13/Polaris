@@ -899,9 +899,9 @@
 
 			for(var/C in colors_to_blend)
 				var/RGB = rgb2num(C)
-				R = between(0, R + RGB[1], 255)
-				G = between(0, G + RGB[2], 255)
-				B = between(0, B + RGB[3], 255)
+				R = clamp(R + RGB[1], 0, 255)
+				G = clamp(G + RGB[2], 0, 255)
+				B = clamp(B + RGB[3], 0, 255)
 			final_color = rgb(R,G,B)
 
 		if(final_color)
@@ -1067,7 +1067,7 @@
 	return !isSynthetic()
 
 /mob/living/proc/adjust_nutrition(amount)
-	nutrition = between(0, nutrition + amount, max_nutrition)
+	nutrition = clamp(nutrition + amount, 0, max_nutrition)
 
 /mob/living/vv_get_header()
 	. = ..()

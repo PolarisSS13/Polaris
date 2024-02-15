@@ -182,7 +182,7 @@ Protectiveness | Armor %
 
 		// Makes sure the numbers stay capped.
 		for(var/number in list(melee_armor, bullet_armor, laser_armor, energy_armor, bomb_armor))
-			number = between(0, number, 100)
+			number = clamp(number, 0, 100)
 
 		armor["melee"] = melee_armor
 		armor["bullet"] = bullet_armor
@@ -191,9 +191,9 @@ Protectiveness | Armor %
 		armor["bomb"] = bomb_armor
 
 		if(!isnull(material.conductivity))
-			siemens_coefficient = between(0, material.conductivity / 10, 10)
+			siemens_coefficient = clamp(material.conductivity / 10, 0, 10)
 
-		var/slowdownModified = between(0, round(material.weight / 10, 0.1), 6)
+		var/slowdownModified = clamp(round(material.weight / 10, 0.1), 0, 6)
 
 		var/slowdownUncapped = (material_slowdown_multiplier * slowdownModified) - material_slowdown_modifier
 

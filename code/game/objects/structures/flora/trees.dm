@@ -128,7 +128,7 @@
 		var/wood = initial(product_amount)
 		product_amount -= round(wood * (abs(amount)/max_health))
 
-	health = between(0, health + amount, max_health)
+	health = clamp(health + amount, 0, max_health)
 	if(health <= 0)
 		die()
 		return

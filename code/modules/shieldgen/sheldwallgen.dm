@@ -66,7 +66,7 @@
 		power = 0
 		return 0
 
-	var/shieldload = between(500, max_stored_power - storedpower, power_draw)	//what we try to draw
+	var/shieldload = clamp(max_stored_power - storedpower, 500, power_draw)	//what we try to draw
 	shieldload = PN.draw_power(shieldload) //what we actually get
 	storedpower += shieldload
 

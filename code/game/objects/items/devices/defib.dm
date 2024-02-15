@@ -518,7 +518,7 @@
 	var/damage_calc = LERP(brain.max_damage, H.getBrainLoss(), brain_death_scale)
 
 	// A bit of sanity.
-	var/brain_damage = between(H.getBrainLoss(), damage_calc, brain.max_damage)
+	var/brain_damage = clamp(damage_calc, H.getBrainLoss(), brain.max_damage)
 
 	H.setBrainLoss(brain_damage)
 

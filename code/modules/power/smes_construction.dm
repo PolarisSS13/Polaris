@@ -154,7 +154,7 @@
 			capacity += C.ChargeCapacity
 			input_level_max += C.IOCapacity
 			output_level_max += C.IOCapacity
-		charge = between(0, charge, capacity)
+		charge = clamp(charge, 0, capacity)
 		return 1
 	return 0
 
@@ -383,12 +383,12 @@
 // Parameters: 1 (new_input - New input value in Watts)
 // Description: Sets input setting on this SMES. Trims it if limits are exceeded.
 /obj/machinery/power/smes/buildable/proc/set_input(var/new_input = 0)
-	input_level = between(0, new_input, input_level_max)
+	input_level = clamp(new_input, 0, input_level_max)
 	update_icon()
 
 // Proc: set_output()
 // Parameters: 1 (new_output - New output value in Watts)
 // Description: Sets output setting on this SMES. Trims it if limits are exceeded.
 /obj/machinery/power/smes/buildable/proc/set_output(var/new_output = 0)
-	output_level = between(0, new_output, output_level_max)
+	output_level = clamp(new_output, 0, output_level_max)
 	update_icon()

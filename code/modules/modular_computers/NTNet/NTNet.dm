@@ -153,7 +153,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	if(!lognumber)
 		return 0
 	// Trim the value if necessary
-	lognumber = between(MIN_NTNET_LOGS, lognumber, MAX_NTNET_LOGS)
+	lognumber = clamp(lognumber, MIN_NTNET_LOGS, MAX_NTNET_LOGS)
 	setting_maxlogcount = lognumber
 	add_log("Configuration Updated. Now keeping [setting_maxlogcount] logs in system memory.")
 
@@ -185,4 +185,3 @@ var/global/datum/ntnet/ntnet_global = new()
 	for(var/datum/ntnet_conversation/chan in chat_channels)
 		if(chan.id == id)
 			return chan
-

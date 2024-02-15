@@ -226,7 +226,7 @@ var/global/list/organ_cache = list()
 	if(germ_level >= INFECTION_LEVEL_ONE)
 		. = 1 //Organ qualifies for effect-specific processing
 		//var/fever_temperature = (owner.species.heat_level_1 - owner.species.body_temperature - 5)* min(germ_level/INFECTION_LEVEL_TWO, 1) + owner.species.body_temperature
-		//owner.bodytemperature += between(0, (fever_temperature - T20C)/BODYTEMP_COLD_DIVISOR + 1, fever_temperature - owner.bodytemperature)
+		//owner.bodytemperature += clamp((fever_temperature - T20C)/BODYTEMP_COLD_DIVISOR + 1, 0, fever_temperature - owner.bodytemperature)
 		var/fever_temperature = owner?.species.heat_discomfort_level * 1.10 //Heat discomfort level plus 10%
 		if(owner?.bodytemperature < fever_temperature)
 			owner?.bodytemperature += min(0.2,(fever_temperature - owner?.bodytemperature) / 10) //Will usually climb by 0.2, else 10% of the difference if less
@@ -319,10 +319,10 @@ var/global/list/organ_cache = list()
 
 //Note: external organs have their own version of this proc
 /obj/item/organ/take_damage(amount, var/silent=0)
-	if(src.robotic >= ORGAN_ROBOT)
-		src.damage = between(0, src.damage + (amount * 0.8), max_damage)
+	if(robotic >= ORGAN_ROBOT)
+		damage = clamp(damage + (amount * 0.8), 0, max_damage)
 	else
-		src.damage = between(0, src.damage + amount, max_damage)
+		damage = clamp(damage + amount, 0, max_damage)
 
 		//only show this if the organ is not robotic
 		if(owner && parent_organ && amount > 0)

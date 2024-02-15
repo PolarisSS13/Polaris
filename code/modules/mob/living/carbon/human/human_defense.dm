@@ -508,7 +508,7 @@ emp_act
 
 	catch_chance -= get_accuracy_penalty()	// Same issues with shooting a gun, or swinging a weapon
 
-	catch_chance = between(1, catch_chance, 100)
+	catch_chance = clamp(catch_chance, 1, 100)
 
 	if(prob(catch_chance))
 		return TRUE

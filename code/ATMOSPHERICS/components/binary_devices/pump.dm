@@ -182,9 +182,9 @@ Thus, the two variables affect pump operation are set in New():
 		update_use_power(!use_power)
 
 	if(signal.data["set_output_pressure"])
-		target_pressure = between(
-			0,
+		target_pressure = clamp(
 			text2num(signal.data["set_output_pressure"]),
+			0,
 			ONE_ATMOSPHERE*50
 		)
 
@@ -227,7 +227,7 @@ Thus, the two variables affect pump operation are set in New():
 					target_pressure = max_pressure_setting
 				if("set")
 					var/new_pressure = input(usr,"Enter new output pressure (0-[max_pressure_setting]kPa)","Pressure control",src.target_pressure) as num
-					src.target_pressure = between(0, new_pressure, max_pressure_setting)
+					src.target_pressure = clamp(new_pressure, 0, max_pressure_setting)
 			. = TRUE
 
 	add_fingerprint(usr)

@@ -187,12 +187,12 @@
 	switch(action)
 		if("adj_pressure")
 			var/new_pressure = text2num(params["adj_pressure"])
-			pressure_setting = between(0, new_pressure, 50*ONE_ATMOSPHERE)
+			pressure_setting = clamp(new_pressure, 0, 50 * ONE_ATMOSPHERE)
 			return TRUE
 
 		if("adj_input_flow_rate")
 			var/new_flow = text2num(params["adj_input_flow_rate"])
-			input_flow_setting = between(0, new_flow, ATMOS_DEFAULT_VOLUME_PUMP + 500) //default flow rate limit for air injectors
+			input_flow_setting = clamp(new_flow, 0, ATMOS_DEFAULT_VOLUME_PUMP + 500) //default flow rate limit for air injectors
 			return TRUE
 
 	if(!radio_connection)
@@ -288,12 +288,12 @@
 	switch(action)
 		if("adj_pressure")
 			var/new_pressure = text2num(params["adj_pressure"])
-			pressure_setting = between(0, new_pressure, 10*ONE_ATMOSPHERE)
+			pressure_setting = clamp(new_pressure, 0, 10 * ONE_ATMOSPHERE)
 			return TRUE
 
 		if("adj_input_flow_rate")
 			var/new_flow = text2num(params["adj_input_flow_rate"])
-			input_flow_setting = between(0, new_flow, ATMOS_DEFAULT_VOLUME_PUMP + 500) //default flow rate limit for air injectors
+			input_flow_setting = clamp(new_flow, 0, ATMOS_DEFAULT_VOLUME_PUMP + 500) //default flow rate limit for air injectors
 			return TRUE
 
 	if(!radio_connection)
@@ -399,7 +399,7 @@
 /obj/machinery/computer/general_air_control/fuel_injection/tgui_act(action, params)
 	if(..())
 		return TRUE
-	
+
 	switch(action)
 		if("refresh_status")
 			device_info = null

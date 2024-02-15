@@ -180,7 +180,7 @@
 	if(attached_grenade && !attached_grenade.active)
 		var/datum/integrated_io/detonation_time = inputs[1]
 		if(isnum(detonation_time.data) && detonation_time.data > 0)
-			attached_grenade.det_time = between(1, detonation_time.data, 12) SECONDS
+			attached_grenade.det_time = clamp(detonation_time.data, 1, 12) SECONDS
 		attached_grenade.activate()
 		var/atom/holder = loc
 		log_and_message_admins("activated a grenade assembly. Last touches: Assembly: [holder.fingerprintslast] Circuit: [fingerprintslast] Grenade: [attached_grenade.fingerprintslast]")

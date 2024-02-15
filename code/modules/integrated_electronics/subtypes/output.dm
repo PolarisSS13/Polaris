@@ -196,7 +196,7 @@
 		var/selected_sound = sounds[ID]
 		if(!selected_sound)
 			return
-		vol = between(0, vol, 100)
+		vol = clamp(vol, 0, 100)
 		playsound(src, selected_sound, vol, freq, -1)
 
 /obj/item/integrated_circuit/output/sound/beeper
@@ -449,7 +449,7 @@
 	if(!isnum(holo_scale) || !isnum(holo_rotation) )
 		return FALSE // Invalid.
 
-	hologram.adjust_scale(between(-2, holo_scale, 2) )
+	hologram.adjust_scale(clamp(holo_scale, -2, 2))
 	hologram.adjust_rotation(holo_rotation)
 	update_hologram_position()
 
@@ -462,8 +462,8 @@
 	if(!isnum(holo_x) || !isnum(holo_y) )
 		return FALSE
 
-	holo_x = between(-7, holo_x, 7)
-	holo_y = between(-7, holo_y, 7)
+	holo_x = clamp(holo_x, -7, 7)
+	holo_y = clamp(holo_y, -7, 7)
 
 	var/turf/T = get_turf(src)
 	if(T)

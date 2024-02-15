@@ -513,7 +513,7 @@
 
 			if(protection < 1)
 				var/cold_factor = abs(protection - 1)
-				H.bodytemperature = between(50, (H.bodytemperature - ((H.bodytemperature - 50) * cold_factor) ), H.bodytemperature)
+				H.bodytemperature = clamp((H.bodytemperature - ((H.bodytemperature - 50) * cold_factor)), 50, H.bodytemperature)
 
 			if(protection < 0.7)
 				to_chat(L, "<span class='danger'>A chilling wave of cold overwhelms you!</span>")

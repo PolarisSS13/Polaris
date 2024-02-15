@@ -40,7 +40,7 @@
 
 	else if(nutrition >= get_grow_nutrition() && amount_grown < 10)
 		adjust_nutrition(-20)
-		amount_grown = between(0, amount_grown + 1, 10)
+		amount_grown = clamp(amount_grown + 1, 0, 10)
 
 // Called if above proc happens while below a nutrition threshold.
 /mob/living/simple_mob/slime/xenobio/proc/handle_starvation()

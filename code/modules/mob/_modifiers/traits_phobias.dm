@@ -26,7 +26,7 @@
 
 /datum/modifier/trait/phobia/proc/adjust_fear(var/amount)
 	var/last_fear = current_fear
-	current_fear = between(0, current_fear + amount, max_fear)
+	current_fear = clamp(current_fear + amount, 0, max_fear)
 
 	// Handle messages.  safepick() is used so that if no messages are defined, it just does nothing, verses runtiming.
 	var/message = null
@@ -689,4 +689,3 @@
 		"WetSkrell was a mistake."
 		)
 	return pick(generic_responses)
-

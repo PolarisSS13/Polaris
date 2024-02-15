@@ -348,7 +348,7 @@
 		"docking_status" = shuttle.shuttle_docking_controller? shuttle.shuttle_docking_controller.get_docking_status() : null,
 		"docking_override" = shuttle.shuttle_docking_controller? shuttle.shuttle_docking_controller.override_enabled : null,
 		"is_in_transit" = shuttle.has_arrive_time(),
-		"travel_progress" = between(0, percent_finished, 100),
+		"travel_progress" = clamp(percent_finished, 0, 100),
 		"time_left" = round( (total_time - elapsed_time) / 10),
 		"can_cloak" = shuttle.can_cloak ? 1 : 0,
 		"cloaked" = shuttle.cloaked ? 1 : 0,

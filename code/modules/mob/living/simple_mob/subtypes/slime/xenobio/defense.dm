@@ -45,7 +45,7 @@
 
 // Shocked grilles don't hurt slimes, and in fact give them charge.
 /mob/living/simple_mob/slime/xenobio/electrocute_act(shock_damage, obj/source, siemens_coeff = 1.0, def_zone = null)
-	power_charge = between(0, power_charge + round(shock_damage / 10), 10)
+	power_charge = clamp(power_charge + round(shock_damage / 10), 0, 10)
 	to_chat(src, span("notice", "\The [source] shocks you, and it charges you."))
 
 // Getting slimebatoned/xenotased.

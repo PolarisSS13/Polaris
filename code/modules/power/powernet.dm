@@ -40,7 +40,7 @@
 	return max(avail - load, 0)
 
 /datum/powernet/proc/draw_power(var/amount)
-	var/draw = between(0, amount, avail - load)
+	var/draw = clamp(amount, 0, avail - load)
 	load += draw
 	return draw
 
@@ -122,7 +122,7 @@
 
 	// At this point, all other machines have finished using power. Anything left over may be used up to charge SMESs.
 	if(inputting.len && smes_demand)
-		var/smes_input_percentage = between(0, (netexcess / smes_demand) * 100, 100)
+		var/smes_input_percentage = clamp((netexcess / smes_demand) * 100, 0, 100)
 		for(var/obj/machinery/power/terminal/T in inputting)
 			var/obj/machinery/power/smes/S = T.master
 			if(istype(S))
@@ -152,11 +152,11 @@
 		var/smes_used = load - (avail - smes_avail) 			// SMESs are always last to provide power
 		if(!smes_used || smes_used < 0 || !smes_avail)			// SMES power isn't available or being used at all, SMES load is therefore 0%
 			return 0
-		return between(0, (smes_used / smes_avail) * 100, 100)	// Otherwise return percentage load of SMESs.
+		return clamp((smes_used / smes_avail) * 100, 0, 100)	// Otherwise return percentage load of SMESs.
 	else
 		if(!load)
 			return 0
-		return between(0, (load / avail) * 100, 100)
+		return clamp((load / avail) * 100, 0, 100)
 
 /datum/powernet/proc/get_electrocute_damage()
 	switch(avail)

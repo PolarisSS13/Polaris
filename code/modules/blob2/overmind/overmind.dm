@@ -97,7 +97,7 @@ var/global/list/overminds = list()
 		return TRUE
 
 /mob/observer/blob/proc/add_points(points)
-	blob_points = between(0, blob_points + points, max_blob_points)
+	blob_points = clamp(blob_points + points, 0, max_blob_points)
 
 /mob/observer/blob/Life()
 	if(ai_controlled && (!client || auto_pilot))

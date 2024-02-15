@@ -140,7 +140,7 @@
 
 	if(signal.data["set_volume_rate"])
 		var/number = text2num(signal.data["set_volume_rate"])
-		volume_rate = between(0, number, air_contents.volume)
+		volume_rate = clamp(number, 0, air_contents.volume)
 
 	if(signal.data["status"])
 		spawn(2)

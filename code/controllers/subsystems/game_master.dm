@@ -85,12 +85,12 @@ SUBSYSTEM_DEF(game_master)
 // Tell the game master that something dangerous happened, e.g. someone dying, station explosions.
 /datum/controller/subsystem/game_master/proc/adjust_danger(amount)
 	amount *= GM.danger_modifier
-	danger = round(between(0, danger + amount, 1000), 0.1)
+	danger = round(clamp(danger + amount, 0, 1000), 0.1)
 
 // Tell the game master that things are getting boring if positive, or something interesting if negative..
 /datum/controller/subsystem/game_master/proc/adjust_staleness(amount)
 	amount *= GM.staleness_modifier
-	staleness = round( between(-20, staleness + amount, 100), 0.1)
+	staleness = round( clamp(staleness + amount, -20, 100), 0.1)
 
 // These are ran before committing to an event.
 // Returns TRUE if the system is allowed to proceed, otherwise returns FALSE.
