@@ -490,3 +490,84 @@
 	color = "#e6efe3"
 	high_message_list = list("You feel sluggish...", "You feel calm and collected.")
 	sober_message_list = list("You feel so much more antsy...", "Your concentration wavers.")
+
+/datum/reagent/drugs/aripiprazole
+	name = "Aripiprazole"
+	id = "aripiprazole"
+	description = "An atypical antipsychotic medication used to treat the symptoms of schizophrenia, bipolar disorder and severe depressive illness."
+	taste_description = "chalk"
+	color = "#df6ea6"
+	high_message_list = list("Everything feels a little calmer.", "You feel a little more content.", "You feel less irritable.", "You feel a little drowsy.")
+	sober_message_list = list("You feel time passing much more quickly.", "You feel irritable.", "You tense up.")
+
+/datum/reagent/drugs/haloperidol
+	name = "Haloperidol"
+	id = "haloperidol"
+	description = "A conventional antipsychotic medication used to treat psychotic disorders, motor tics and hyperactive or aggressive behavioural problems."
+	taste_description = "chalk"
+	color = "#a04070"
+	high_message_list = list("You feel relaxed.", "You feel sluggish.", "You feel much calmer.")
+	sober_message_list = list("You feel the need to keep moving.", "You feel aggressive.")
+
+/datum/reagent/drugs/clonazepam
+	name = "Clonazepam"
+	id = "clonazepam"
+	description = "A benzodiazepine medication used to treat severe anxiety, panic disorders and certain types of seizures."
+	taste_description = "chalk"
+	color = "#d83084"
+	high_message_list = list("You feel in control of yourself.", "You feel safer.")
+	sober_message_list = list("You feel like you're losing control.", "You feel as if danger is lurking nearby...")
+
+/datum/reagent/drugs/diazepam
+	name = "Diazepam"
+	id = "diazepam"
+	description = "A benzodiazepine medication used to treat mild anxiety and panic attacks."
+	taste_description = "strange fruit"
+	color = "#d41474"
+	high_message_list = list("You feel like danger is far away.", "You feel relaxed.")
+	sober_message_list = list("You feel that danger is just around the corner...", "You feel antsy.")
+
+/datum/reagent/drugs/zuclopenthixol
+	name = "Zuclopenthixol"
+	id = "zuclopenthixol"
+	description = "An antipsychotic sedative medication used to treat severe schizophrenia and episodes of psychosis."
+	taste_description = "chalk"
+	color = "#970d52"
+	high_message_list = list("You feel tired.", "You feel very drowsy.", "You feel extremely relaxed.")
+	sober_message_list = list("You feel awake and alert.", "You feel like you don't need to sleep.", "You feel extremely tense.")
+
+/datum/reagent/drugs/amitryptyline
+	name = "Amitryptyline"
+	id = "amitryptyline"
+	description = "A tricyclic antidepressant medication used to treat nerve pain, back pain, migraines and depressive illness."
+	taste_description = "chalk"
+	color = "#800e47"
+	high_message_list = list("You feel a little drowsy.", "You feel content.")
+	sober_message_list = list("You feel awake.", "You feel active.", "You feel more numb.")
+
+/datum/reagent/drugs/fluoxetine
+	name = "Fluoxetine"
+	id = "fluoxetine"
+	description = "An SSRI antidepressant medication used to treat depressive illness, obsessive-compulsive disorder and some eating disorders."
+	taste_description = "chalk"
+	color = "#b8005c"
+	high_message_list = list("You feel like things are brighter.", "Everything feels a little more vivid.")
+	sober_message_list = list("You feel like things are darker.", "Everything feels a little more dull.")
+
+/datum/reagent/drugs/carbamazepine
+	name = "Carbamazepine"
+	id = "carbamazepine"
+	description = "An anticonvulsant medication used to treat epilepsy, nerve pain, and sometimes bipolar disorder."
+	taste_description = "chalk"
+	color = "#75003b"
+	high_message_list = list("You feel more in control.", "You feel as if time is moving slower.")
+	sober_message_list = list("You feel less in control...", "You feel twitchy.", "You feel as if time is moving faster.")
+
+/datum/reagent/drugs/diphenhydramine
+	name = "Diphenhydramine"
+	id = "diphenhydramine"
+	description = "An antihistamine medication used for the relief of allergies, motion sickness and insomnia."
+	taste_description = "caramel"
+	color = "#5a1136"
+	high_message_list = list("You feel a little drowsy.")
+	sober_message_list = list("You feel alert.")
