@@ -177,6 +177,10 @@ emp_act
 		return 0
 	var/protection = 0
 	var/list/protective_gear = def_zone.get_covering_clothing()
+
+	if(def_zone.species.natural_armour_values)	// You have a Cool Alien Limb with armor? Congrats, you get that armor!
+		protection += def_zone.species.natural_armour_values[type]
+
 	for(var/obj/item/clothing/gear in protective_gear)
 		protection += gear.armor[type]
 

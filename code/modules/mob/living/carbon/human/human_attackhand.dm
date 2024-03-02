@@ -109,7 +109,12 @@
 			if(w_uniform)
 				w_uniform.add_fingerprint(M)
 
-			var/obj/item/grab/G = new /obj/item/grab(M, src)
+			var/obj/item/grab/G
+			if(istype(H))
+				G = make_grab(M, src, H.current_grab_type)
+			else
+				G = make_grab(M,src, GRAB_NORMAL)
+
 			if(buckled)
 				to_chat(M, "<span class='notice'>You cannot grab [src], [TT.he] is buckled in!</span>")
 				return
@@ -120,7 +125,7 @@
 
 			H.do_attack_animation(src)
 			playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			visible_message("<span class='warning'>[M] has grabbed [src][(M.zone_sel.selecting == "l_hand" || M.zone_sel.selecting == "r_hand")? " by their hands!":" passively!"]</span>")
+			visible_message("<span class='warning'>[M] has grabbed [src][(G.state >= 2) ? " aggressively!" :  ((M.zone_sel.selecting == "l_hand" || M.zone_sel.selecting == "r_hand")? " by their hands!":" passively!")]</span>")
 			return TRUE
 
 		if(I_HURT)
@@ -261,62 +266,66 @@
 			apply_damage(real_damage, hit_dam_type, hit_zone, armour, soaked, sharp=attack.sharp, edge=attack.edge)
 
 		if(I_DISARM)
-			add_attack_logs(H,src,"Disarmed")
+			if(H.species)
+				H.species.disarm_attackhand(M, src)
+			else	// Fallback. Not only humans can disarm.
+				add_attack_logs(H,src,"Disarmed")
 
-			M.do_attack_animation(src)
+				M.do_attack_animation(src)
 
-			if(w_uniform)
-				w_uniform.add_fingerprint(M)
-			var/obj/item/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
+				if(w_uniform)
+					w_uniform.add_fingerprint(M)
+				var/obj/item/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
 
-			var/list/holding = list(get_active_hand() = 40, get_inactive_hand = 20)
+				var/list/holding = list(get_active_hand() = 40, get_inactive_hand = 20)
 
-			//See if they have any guns that might go off
-			for(var/obj/item/gun/W in holding)
-				if(W && prob(holding[W]))
-					var/list/turfs = list()
-					for(var/turf/T in view())
-						turfs += T
-					if(turfs.len)
-						var/turf/target = pick(turfs)
-						visible_message("<span class='danger'>[src]'s [W] goes off during the struggle!</span>")
-						return W.afterattack(target,src)
+				//See if they have any guns that might go off
+				for(var/obj/item/gun/W in holding)
+					if(W && prob(holding[W]))
+						var/list/turfs = list()
+						for(var/turf/T in view())
+							turfs += T
+						if(turfs.len)
+							var/turf/target = pick(turfs)
+							visible_message("<span class='danger'>[src]'s [W] goes off during the struggle!</span>")
+							return W.afterattack(target,src)
 
-			if(last_push_time + 30 > world.time)
-				visible_message("<span class='warning'>[M] has weakly pushed [src]!</span>")
-				return
-
-			var/randn = rand(1, 100)
-			last_push_time = world.time
-			// We ARE wearing shoes OR
-			// We as a species CAN be slipped when barefoot
-			// And also 1 in 4 because rngesus
-			if((shoes || !(species.flags & NO_SLIP)) && randn <= 25)
-				var/armor_check = run_armor_check(affecting, "melee")
-				apply_effect(3, WEAKEN, armor_check)
-				playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-				if(armor_check < 60)
-					visible_message("<span class='danger'>[M] has pushed [src]!</span>")
-				else
-					visible_message("<span class='warning'>[M] attempted to push [src]!</span>")
-				return
-
-			if(randn <= 60)
-				//See about breaking grips or pulls
-				if(break_all_grabs(M))
-					playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+				if(last_push_time + 30 > world.time)
+					visible_message("<span class='warning'>[M] has weakly pushed [src]!</span>")
 					return
 
-				//Actually disarm them
-				for(var/obj/item/I in holding)
-					if(I)
-						drop_from_inventory(I)
-						visible_message("<span class='danger'>[M] has disarmed [src]!</span>")
+				var/randn = rand(1, 100)
+				last_push_time = world.time
+				// We ARE wearing shoes OR
+				// We as a species CAN be slipped when barefoot
+				// And also 1 in 4 because rngesus
+				if((shoes || !(species.flags & NO_SLIP)) && randn <= 25)
+					var/armor_check = run_armor_check(affecting, "melee")
+					apply_effect(3, WEAKEN, armor_check)
+					playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+					if(armor_check < 60)
+						visible_message("<span class='danger'>[M] has pushed [src]!</span>")
+					else
+						visible_message("<span class='warning'>[M] attempted to push [src]!</span>")
+					return
+
+				if(randn <= 60)
+					//See about breaking grips or pulls
+					if(break_all_grabs(M))
 						playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 						return
 
-			playsound(src, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-			visible_message("<span class='filter_combat'><font color='red'> <B>[M] attempted to disarm [src]!</B></font></span>")
+					//Actually disarm them
+					for(var/obj/item/I in holding)
+						if(I)
+							drop_from_inventory(I)
+							visible_message("<span class='danger'>[M] has disarmed [src]!</span>")
+							playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+							return
+
+				playsound(src, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+				visible_message("<font color='red'> <B>[M] attempted to disarm [src]!</B></font>")
+
 	return
 
 /mob/living/carbon/human/proc/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, inrange, params)

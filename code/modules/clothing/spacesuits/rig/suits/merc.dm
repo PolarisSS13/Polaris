@@ -49,3 +49,10 @@
 	. = ..()
 	if(!QDELETED(src))
 		emag_act()
+
+/obj/item/rig/merc/nabber
+	name = "atypical crimson hardsuit control module"
+	desc = "A blood-red hardsuit featuring some fairly illegal technology. This one seems to have been made for a non-humanoid bodyplan."
+
+	boot_type = null
+	species_restricted = list(SPECIES_NABBER)
