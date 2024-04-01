@@ -97,7 +97,7 @@
 		"Rasputin",
 		"Stride",
 		"Suzaku",
-		"Polaris",
+		"Goon",
 		"Hathor",
 		"Dream",
 		"Gaia",

@@ -1,6 +1,6 @@
 # Polaris [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3.0-orange.svg)](https://opensource.org/licenses/AGPL-3.0) <!--[![CI Status](https://github.com/polarisss13/polaris/workflows/MAIN-BRANCH-CI-HERE/badge.svg)](https://github.com/polarisss13/polaris/actions)-->
 
-[Wiki](http://ss13polaris.com) - [Discord](https://discord.gg/dvUcacC) - [Forum](https://forum.ss13polaris.com)
+[Wiki](http://ss13polaris.com) - [Discord](https://discord.gg/dvUcacC) - [Forum](https://forums.somethingawful.com/showthread.php?threadid=3815807)
 
 Polaris is a fork of the Baystation12 code branch for the game Spacestation13.
 
