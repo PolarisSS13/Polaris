@@ -238,11 +238,18 @@
 	var/burn = 0
 	var/icon_state_broken = "broken"
 
+	var/max_damage
+
+/obj/item/robot_parts/robot_component/proc/is_functional()
+	return (brute + burn) < max_damage
+
 /obj/item/robot_parts/robot_component/binary_communication_device
 	name = "binary communication device"
 	desc = "A module used for binary communications over encrypted frequencies, commonly used by synthetic robots."
 	icon_state = "binradio"
 	icon_state_broken = "binradio_broken"
+
+	max_damage = 40
 
 /obj/item/robot_parts/robot_component/actuator
 	name = "actuator"
@@ -250,11 +257,15 @@
 	icon_state = "motor"
 	icon_state_broken = "motor_broken"
 
+	max_damage = 50
+
 /obj/item/robot_parts/robot_component/armour
 	name = "armour plating"
 	desc = "A pair of flexible, adaptable armor plates, used to protect the internals of robots."
 	icon_state = "armor"
 	icon_state_broken = "armor_broken"
+
+	max_damage = 90
 
 /obj/item/robot_parts/robot_component/armour_platform
 	name = "platform armour plating"
@@ -262,6 +273,8 @@
 	icon_state = "armor"
 	icon_state_broken = "armor_broken"
 	color = COLOR_GRAY80
+
+	max_damage = 140
 
 /obj/item/robot_parts/robot_component/armour_light
 	name = "lightweight armour plating"
@@ -275,14 +288,21 @@
 	icon_state = "camera"
 	icon_state_broken = "camera_broken"
 
+	max_damage = 40
+
 /obj/item/robot_parts/robot_component/diagnosis_unit
 	name = "diagnosis unit"
 	desc = "An internal computer and sensors used by robots and exosuits to accurately diagnose any system discrepancies on their components."
 	icon_state = "analyser"
 	icon_state_broken = "analyser_broken"
 
+	max_damage = 30
+
 /obj/item/robot_parts/robot_component/radio
 	name = "radio"
 	desc = "A modular, multi-frequency radio used by robots and exosuits to enable communication systems. Comes with built-in subspace receivers."
 	icon_state = "radio"
 	icon_state_broken = "radio_broken"
+
+	max_damage = 40
+

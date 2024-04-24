@@ -115,7 +115,7 @@
 	if(!power_supply.checked_use(charge_cost)) return null
 	var/mob/living/M = loc // TGMC Ammo HUD
 	if(istype(M)) // TGMC Ammo HUD
-		M?.hud_used.update_ammo_hud(M, src)
+		M?.hud_used?.update_ammo_hud(M, src)
 	return new projectile_type(src)
 
 /obj/item/gun/energy/proc/load_ammo(var/obj/item/C, mob/user)
@@ -137,7 +137,7 @@
 					playsound(src, 'sound/weapons/flipblade.ogg', 50, 1)
 					update_icon()
 					update_held_icon()
-					user.hud_used.update_ammo_hud(user, src) // TGMC Ammo HUD
+					user?.hud_used?.update_ammo_hud(user, src) // TGMC Ammo HUD
 		else
 			to_chat(user, "<span class='notice'>This cell is not fitted for [src].</span>")
 	return
@@ -154,7 +154,7 @@
 		playsound(src, 'sound/weapons/empty.ogg', 50, 1)
 		update_icon()
 		update_held_icon()
-		user.hud_used.update_ammo_hud(user, src) // TGMC Ammo HUD
+		user?.hud_used?.update_ammo_hud(user, src) // TGMC Ammo HUD
 	else
 		to_chat(user, "<span class='notice'>[src] does not have a power cell.</span>")
 
@@ -172,7 +172,7 @@
 	if(isrobot(src.loc))
 		var/mob/living/silicon/robot/R = src.loc
 		return R.cell
-	if(istype(src.loc, /obj/item/rig_module))
+	else if(istype(src.loc, /obj/item/rig_module))
 		var/obj/item/rig_module/module = src.loc
 		if(module.holder && module.holder.wearer)
 			var/mob/living/carbon/human/H = module.holder.wearer
@@ -180,6 +180,11 @@
 				var/obj/item/rig/suit = H.get_rig()
 				if(istype(suit))
 					return suit.cell
+	else if(istype(loc, /atom/movable))
+		var/atom/movable/AM = loc
+		var/obj/item/cell/C = AM.get_cell()
+		if(C)
+			return C
 	return null
 
 /obj/item/gun/energy/examine(mob/user, distance, infix, suffix)

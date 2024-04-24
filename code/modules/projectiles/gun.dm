@@ -225,6 +225,10 @@
 	Fire(A,user,params) //Otherwise, fire normally.
 */
 
+// Can the weapon be click-dragged to fire on turfs when able.
+/obj/item/gun/proc/can_autofire()
+	return FALSE
+
 /obj/item/gun/attack(atom/A, mob/living/user, def_zone)
 	if (A == user && user.zone_sel.selecting == O_MOUTH && !mouthshoot)
 		handle_suicide(user)
@@ -404,7 +408,7 @@
 	if(muzzle_flash)
 		set_light(0)
 
-	user.hud_used.update_ammo_hud(user, src)
+	user?.hud_used?.update_ammo_hud(user, src)
 
 // Similar to the above proc, but does not require a user, which is ideal for things like turrets.
 /obj/item/gun/proc/Fire_userless(atom/target)
@@ -497,7 +501,7 @@
 /obj/item/gun/proc/handle_click_empty(mob/user)
 	if (user)
 		user.visible_message("*click click*", "<span class='danger'>*click*</span>")
-		user.hud_used.update_ammo_hud(user, src)
+		user?.hud_used?.update_ammo_hud(user, src)
 	else
 		src.visible_message("*click click*")
 	playsound(src, 'sound/weapons/empty.ogg', 100, 1)
@@ -729,7 +733,7 @@
 	var/datum/firemode/new_mode = firemodes[sel_mode]
 	new_mode.apply_to(src)
 	to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
-	user.hud_used.update_ammo_hud(user, src)
+	user?.hud_used?.update_ammo_hud(user, src)
 
 	return new_mode
 
@@ -752,12 +756,12 @@
 /obj/item/gun/equipped(mob/living/user, slot) // When a gun is equipped to your hands, we'll add the HUD to the user. Pending porting over TGMC guncode where wielding is far more sensible.
 	if(user?.hud_used)
 		if(slot == slot_l_hand || slot == slot_r_hand)
-			user.hud_used.add_ammo_hud(user, src)
+			user?.hud_used?.add_ammo_hud(user, src)
 		else
-			user.hud_used.remove_ammo_hud(user, src)
+			user?.hud_used?.remove_ammo_hud(user, src)
 	return ..()
 
 /obj/item/gun/dropped(mob/living/user) // Ditto as above, we remove the HUD. Pending porting TGMC code to clean up this fucking nightmare of spaghetti.
 	if(user?.hud_used)
-		user.hud_used.remove_ammo_hud(user, src)
+		user?.hud_used?.remove_ammo_hud(user, src)
 	..()

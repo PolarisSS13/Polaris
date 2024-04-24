@@ -361,6 +361,12 @@
 	else
 		. = ..()
 
+/client/MouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
+	. = ..()
+	var/mob/living/M = mob
+	if(istype(M))
+		M.OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
+
 /client/proc/last_activity_seconds()
 	return inactivity / 10
 
