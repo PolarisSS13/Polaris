@@ -168,6 +168,7 @@ LINEN BINS
 	icon_state = "linenbin-full"
 	anchored = 1
 	var/amount = 20
+	var/max_amount = 20
 	var/list/sheets = list()
 	var/obj/item/hidden = null
 
@@ -183,10 +184,12 @@ LINEN BINS
 		. += "There are [amount] bed sheets in the bin."
 
 /obj/structure/bedsheetbin/update_icon()
-	switch(amount)
-		if(0)				icon_state = "linenbin-empty"
-		if(1 to amount / 2)	icon_state = "linenbin-half"
-		else				icon_state = "linenbin-full"
+	if(amount < 1)
+		icon_state = "linenbin-empty"
+	else if(amount <= (max_amount/2))
+		icon_state = "linenbin-half"
+	else
+		icon_state = "linenbin-full"
 
 
 /obj/structure/bedsheetbin/attackby(obj/item/I as obj, mob/user as mob)
@@ -217,10 +220,12 @@ LINEN BINS
 		B.loc = user.loc
 		user.put_in_hands(B)
 		to_chat(user, "<span class='notice'>You take [B] out of [src].</span>")
+		update_icon()
 
 		if(hidden)
 			hidden.loc = user.loc
 			to_chat(user, "<span class='notice'>[hidden] falls out of [B]!</span>")
+			update_icon()
 			hidden = null
 
 
