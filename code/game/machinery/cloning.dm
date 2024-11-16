@@ -150,7 +150,7 @@
 
 	// Upgraded cloners can reduce the time of the modifier, up to 80%
 	var/clone_sickness_length = abs(((heal_level - 20) / 100 ) - 1)
-	clone_sickness_length = between(0.2, clone_sickness_length, 1.0) // Caps it off just incase.
+	clone_sickness_length = clamp(clone_sickness_length, 0.2, 1) // Caps it off just incase.
 	modifier_lower_bound = round(modifier_lower_bound * clone_sickness_length, 1)
 	modifier_upper_bound = round(modifier_upper_bound * clone_sickness_length, 1)
 

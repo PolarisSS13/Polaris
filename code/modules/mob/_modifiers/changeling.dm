@@ -40,7 +40,7 @@
 		else
 			L = holder
 
-		L.mind.changeling.chem_charges = between(0, L.mind.changeling.chem_charges - chem_maintenance, L.mind.changeling.chem_storage)
+		L.mind.changeling.chem_charges = clamp(L.mind.changeling.chem_charges - chem_maintenance, 0, L.mind.changeling.chem_storage)
 
 /datum/modifier/changeling/thermal_sight
 	name = "Thermal Adaptation"

@@ -54,7 +54,7 @@
 		var/obj/item/stack/nanopaste/T = P
 		if (integrity < 100)
 			if (T.use(1))
-				integrity = between(0, integrity + rand(10, 20), 100)
+				integrity = clamp(integrity + rand(10, 20), 0, 100)
 				to_chat(usr, "You apply the Nanopaste to [src], repairing some of the damage.")
 		else
 			to_chat(usr, "This machine is already in perfect condition.")
@@ -272,7 +272,7 @@
 		if ((T0C + 200) to INFINITY)
 			damage_chance = 100
 	if (damage_chance && prob(damage_chance))
-		integrity = between(0, integrity - 1, 100)
+		integrity = clamp(integrity - 1, 0, 100)
 	if (delay > 0)
 		delay--
 	else if (on)

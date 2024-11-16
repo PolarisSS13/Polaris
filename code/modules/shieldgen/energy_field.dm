@@ -90,7 +90,7 @@
 
 /obj/effect/energy_field/proc/adjust_strength(amount, impact = 1)
 	var/old_density = density
-	strength = between(0, strength + amount, max_strength)
+	strength = clamp(strength + amount, 0, max_strength)
 
 	//maptext = "[round(strength, 0.1)]/[max_strength]"
 
@@ -139,7 +139,7 @@
 
 // Small visual effect, makes the shield tiles brighten up by becoming more opaque for a moment, and spreads to nearby shields.
 /obj/effect/energy_field/proc/impact_effect(var/i, var/list/affected_shields = list())
-	i = between(1, i, 10)
+	i = clamp(1, i, 10)
 	alpha = 200
 	animate(src, alpha = initial(alpha), time = 1 SECOND)
 	affected_shields |= src
@@ -152,4 +152,3 @@
 					for(var/obj/effect/energy_field/F in T)
 						if(!(F in affected_shields))
 							F.impact_effect(i, affected_shields) // Spread the effect to them.
-

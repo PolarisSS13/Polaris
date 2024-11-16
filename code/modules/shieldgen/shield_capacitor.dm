@@ -105,7 +105,7 @@
 		PN = C.powernet
 
 	if (PN)
-		var/power_draw = between(0, max_charge - stored_charge, charge_rate) //what we are trying to draw
+		var/power_draw = clamp(max_charge - stored_charge, 0, charge_rate) //what we are trying to draw
 		power_draw = PN.draw_power(power_draw) //what we actually get
 		stored_charge += power_draw
 

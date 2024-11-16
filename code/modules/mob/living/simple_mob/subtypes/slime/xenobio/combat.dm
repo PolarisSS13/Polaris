@@ -8,7 +8,7 @@
 				return FALSE
 
 			if(I_DISARM)
-				var/stun_power = between(0, power_charge + rand(0, 3), 10)
+				var/stun_power = clamp(power_charge + rand(0, 3), 0, 10)
 
 				if(ishuman(L))
 					var/mob/living/carbon/human/H = L

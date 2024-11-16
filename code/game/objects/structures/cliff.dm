@@ -254,7 +254,7 @@ two tiles on initialization, and which way a cliff is facing may change during m
 
 			if(length(vehicle.buckled_mobs))
 				for(var/mob/living/rider in vehicle.buckled_mobs)
-					var/damage = between(20, rider.getMaxHealth() * 0.4, 100)
+					var/damage = clamp(rider.getMaxHealth() * 0.4, 20, 100)
 					var/target_zone = ran_zone()
 					var/blocked = rider.run_armor_check(target_zone, "melee") * harm
 					var/soaked = rider.get_armor_soak(target_zone, "melee") * harm
@@ -278,7 +278,7 @@ two tiles on initialization, and which way a cliff is facing may change during m
 					continue
 
 				passengers |= passenger
-				var/damage = between(10, L.getMaxHealth() * 0.4, 50)
+				var/damage = clamp(L.getMaxHealth() * 0.4, 10, 50)
 				var/target_zone = ran_zone()
 				var/blocked = passenger.run_armor_check(target_zone, "melee") * harm
 				var/soaked = passenger.get_armor_soak(target_zone, "melee") * harm
@@ -287,7 +287,7 @@ two tiles on initialization, and which way a cliff is facing may change during m
 				shake_camera(passenger, 1, 1)
 				to_chat(passenger, SPAN_WARNING("\The [MP] shakes, bouncing you violently!"))
 
-			Mech.take_damage(between(50, Mech.maxhealth * 0.4 * harm, 300))
+			Mech.take_damage(clamp(Mech.maxhealth * 0.4 * harm, 50, 300))
 
 			if(QDELETED(Mech) && length(passengers))	// Damage caused the mech to explode, or otherwise vanish.
 				for(var/mob/living/victim in passengers)
@@ -316,7 +316,7 @@ two tiles on initialization, and which way a cliff is facing may change during m
 		// The bigger they are, the harder they fall.
 		// They will take at least 20 damage at the minimum, and tries to scale up to 40% of their max health.
 		// This scaling is capped at 100 total damage, which occurs if the thing that fell has more than 250 health.
-		var/damage = between(20, L.getMaxHealth() * 0.4, 100)
+		var/damage = clamp(L.getMaxHealth() * 0.4, 20, 100)
 		var/target_zone = ran_zone()
 		var/blocked = L.run_armor_check(target_zone, "melee") * harm
 		var/soaked = L.get_armor_soak(target_zone, "melee") * harm

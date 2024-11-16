@@ -266,7 +266,7 @@
 				playsound(src, welder.usesound, 50, 1)
 				if(do_after(user, (5 * repairing) * welder.toolspeed) && welder && welder.isOn())
 					to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
-					health = between(health, health + repairing*DOOR_REPAIR_AMOUNT, maxhealth)
+					health = clamp(health + repairing * DOOR_REPAIR_AMOUNT, health, maxhealth)
 					update_icon()
 					repairing = 0
 			return
