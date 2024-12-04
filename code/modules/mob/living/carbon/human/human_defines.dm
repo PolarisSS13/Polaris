@@ -156,3 +156,7 @@
 	var/custom_species
 
 	dexterity = MOB_DEXTERITY_FULL
+
+	var/current_grab_type = GRAB_NORMAL	// What type of grab they use when they grab someone. Default is just the regular grab item.
+
+	var/last_attack = 0	// Timestamp of the last 'special attack'. Used by Nabbers' disarm slam, as example.

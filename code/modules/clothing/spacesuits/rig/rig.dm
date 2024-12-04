@@ -26,6 +26,7 @@
 	permeability_coefficient = 0.1
 	unacidable = 1
 	preserve_item = 1
+	var/list/species_restricted
 
 	var/suit_state //The string used for the suit's icon_state.
 
@@ -167,6 +168,9 @@
 		piece.unacidable = unacidable
 		if(islist(armor)) piece.armor = armor.Copy()
 		if(islist(armorsoak)) piece.armorsoak = armorsoak.Copy()
+		if(islist(species_restricted) && istype(piece, /obj/item/clothing))
+			var/obj/item/clothing/rigpiece = piece
+			rigpiece.species_restricted = species_restricted.Copy()
 
 	update_icon(1)
 

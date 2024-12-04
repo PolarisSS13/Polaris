@@ -1369,7 +1369,9 @@
 
 		if(config.welder_vision)
 			var/found_welder
-			if(species.short_sighted)
+			var/ambient_brightness = get_ambient_lumcount()
+			var/eyecheck = eyecheck()
+			if(species.short_sighted || (species.nocturnal_sight && (((ambient_brightness > 0.4) && (eyecheck < 0)) || ((ambient_brightness <= 0.4) && (eyecheck >= 0)))))	// Shortsighted, darkness-dwelling in light without protection, or darkness-dwelling in darkness with overprotection.
 				found_welder = 1
 			else
 				if(istype(glasses, /obj/item/clothing/glasses/welding))
