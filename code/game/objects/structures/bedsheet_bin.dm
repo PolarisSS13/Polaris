@@ -161,90 +161,101 @@ LINEN BINS
 	icon_state = "doublesheetian"
 	item_state = "sheetian"
 
+
 /obj/structure/bedsheetbin
 	name = "linen bin"
 	desc = "A linen bin. It looks rather cosy."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "linenbin-full"
-	anchored = 1
-	var/amount = 20
+	anchored = TRUE
+	var/max_amount = 10
+	var/min_amount
+	var/amount
 	var/list/sheets = list()
-	var/obj/item/hidden = null
+	var/obj/item/hidden
+
+
+/obj/structure/bedsheetbin/Destroy()
+	QDEL_NULL_LIST(sheets)
+	QDEL_NULL(hidden)
+	return ..()
+
+
+/obj/structure/bedsheetbin/Initialize()
+	. = ..()
+	amount = max_amount
 
 
 /obj/structure/bedsheetbin/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
-	if(amount < 1)
+	if (amount < 1)
 		. += "There are no bed sheets in the bin."
-	else if(amount == 1)
+	else if (amount == 1)
 		. += "There is one bed sheet in the bin."
 	else
 		. += "There are [amount] bed sheets in the bin."
 
+
 /obj/structure/bedsheetbin/update_icon()
-	switch(amount)
-		if(0)				icon_state = "linenbin-empty"
-		if(1 to amount / 2)	icon_state = "linenbin-half"
-		else				icon_state = "linenbin-full"
+	var/scale = clamp((amount / max_amount) * 100, 0, 100)
+	switch (scale)
+		if (0)
+			icon_state = "linenbin-empty"
+		if (1 to 50)
+			icon_state = "linenbin-half"
+		else
+			icon_state = "linenbin-full"
 
 
-/obj/structure/bedsheetbin/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/bedsheet))
+/obj/structure/bedsheetbin/attackby(obj/item/item, mob/living/user)
+	if (istype(item, /obj/item/bedsheet))
 		user.drop_item()
-		I.loc = src
-		sheets.Add(I)
+		item.loc = src
+		sheets += item
 		amount++
-		to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
-	else if(amount && !hidden && I.w_class < ITEMSIZE_LARGE)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
+		to_chat(user, "<span class='notice'>You put [item] in [src].</span>")
+	else if (amount && !hidden && item.w_class < ITEMSIZE_LARGE)
 		user.drop_item()
-		I.loc = src
-		hidden = I
-		to_chat(user, "<span class='notice'>You hide [I] among the sheets.</span>")
-
-/obj/structure/bedsheetbin/attack_hand(mob/user as mob)
-	if(amount >= 1)
-		amount--
-
-		var/obj/item/bedsheet/B
-		if(sheets.len > 0)
-			B = sheets[sheets.len]
-			sheets.Remove(B)
-
-		else
-			B = new /obj/item/bedsheet(loc)
-
-		B.loc = user.loc
-		user.put_in_hands(B)
-		to_chat(user, "<span class='notice'>You take [B] out of [src].</span>")
-
-		if(hidden)
-			hidden.loc = user.loc
-			to_chat(user, "<span class='notice'>[hidden] falls out of [B]!</span>")
-			hidden = null
+		item.loc = src
+		hidden = item
+		to_chat(user, "<span class='notice'>You hide [item] among the sheets.</span>")
 
 
+/obj/structure/bedsheetbin/attack_hand(mob/living/user)
+	if(amount < 1)
+		return
 	add_fingerprint(user)
-
-/obj/structure/bedsheetbin/attack_tk(mob/user as mob)
-	if(amount >= 1)
-		amount--
-
-		var/obj/item/bedsheet/B
-		if(sheets.len > 0)
-			B = sheets[sheets.len]
-			sheets.Remove(B)
-
-		else
-			B = new /obj/item/bedsheet(loc)
-
-		B.loc = loc
-		to_chat(user, "<span class='notice'>You telekinetically remove [B] from [src].</span>")
-		update_icon()
-
-		if(hidden)
-			hidden.loc = loc
-			hidden = null
+	amount--
+	var/obj/item/bedsheet/sheet = length(sheets)
+	if (sheet)
+		sheet = sheets[sheet]
+		--sheets.len
+	else
+		sheet = new /obj/item/bedsheet
+	user.put_in_hands(sheet)
+	to_chat(user, "<span class='notice'>You take [sheet] out of [src].</span>")
+	if (hidden)
+		hidden.dropInto(loc)
+		hidden = null
+		to_chat(user, "<span class='notice'>[hidden] falls out of [src]!</span>")
+	update_icon()
 
 
+/obj/structure/bedsheetbin/attack_tk(mob/living/user)
+	if(amount < 1)
+		return
 	add_fingerprint(user)
+	amount--
+	var/obj/item/bedsheet/sheet = length(sheets)
+	if (sheet)
+		sheet = sheets[sheet]
+		--sheets.len
+	else
+		sheet = new /obj/item/bedsheet
+	sheet.dropInto(loc)
+	to_chat(user, "<span class='notice'>You telekinetically remove [sheet] from [src].</span>")
+	if (hidden)
+		hidden.dropInto(loc)
+		hidden = null
+		to_chat(user, "<span class='notice'>[hidden] falls out of [src]!</span>")
+	update_icon()
