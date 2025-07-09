@@ -7,10 +7,14 @@ on:
 env:
   BASENAME: "polaris"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   file_tests:
     name: Run Linters
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - name: Ensure +x on CI directory
@@ -26,7 +30,7 @@ jobs:
 
   dreamchecker:
     name: DreamChecker
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
@@ -47,29 +51,34 @@ jobs:
           ~/dreamchecker > ${GITHUB_WORKSPACE}/output-annotations.txt 2>&1
 
       - name: Annotate Linter
-        uses: yogstation13/DreamAnnotate@v2
+        uses: yogstation13/DreamAnnotate@8ef04ef7fbb4ac63ee2daca222af91599e0af5e1
         if: always()
         with:
           outputFile: output-annotations.txt
 
   unit_tests:
     name: Integration Tests
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+
       - name: Ensure +x on CI directory
         run: |
           chmod -R +x ./tools/ci
+
       - name: Setup Cache
         uses: actions/cache@v4
         with:
           path: $HOME/BYOND
           key: ${{ runner.os }}-byond
-      - name: Install RUST_G Dependencies
+
+      - name: Install RUST_G
         run: |
+          ./tools/ci/install_rustg.sh
           sudo dpkg --add-architecture i386
           sudo apt update || true
-          sudo apt install libc6:i386 libgcc1:i386 libstdc++6:i386 libssl1.1:i386 zlib1g:i386
+          sudo apt install zlib1g-dev:i386
+
       - name: Unit Tests
         run: |
           tools/ci/install_byond.sh
@@ -78,6 +87,7 @@ jobs:
           TEST_DEFINE: "UNIT_TEST"
           TEST_FILE: "code/_unit_tests.dm"
           RUN: "1"
+
       - name: Compile POIs (no run)
         run: |
           tools/ci/install_byond.sh
@@ -86,6 +96,7 @@ jobs:
           TEST_DEFINE: "MAP_TEST"
           TEST_FILE: "code/_map_tests.dm"
           RUN: "0"
+
       - name: Compile away missions (no run)
         run: |
           tools/ci/install_byond.sh
