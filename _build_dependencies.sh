@@ -1,11 +1,11 @@
 # This file has all the information on what versions of libraries are thrown into the code
-# For dreamchecker
-export SPACEMAN_DMM_VERSION=suite-1.7.3
-# For NanoUI + TGUI
-export NODE_VERSION=12
-# Byond Major
+
 export BYOND_MAJOR=514
-# Byond Minor
+
 export BYOND_MINOR=1589
-# Macro Count
-export MACRO_COUNT=4
+
+export RUST_G_VERSION=3.9.0
+
+export SPACEMAN_DMM_VERSION=suite-1.9
+
+export NODE_VERSION=12

@@ -1,0 +1,10 @@
+dm:
+  - '**/*.dm'
+  - '**/*.dmm'
+  - '**/*.dmf'
+  - '**/*.dme'
+  - 'tools/ci/validate_files.sh'
+  - '_build_dependencies.sh'
+tgui:
+  - 'tgui/*'
+  - '_build_dependencies.sh'
