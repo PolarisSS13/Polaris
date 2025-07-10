@@ -87,7 +87,7 @@ if [ $retVal -ne 0 ]; then
 fi
 
 #Checking for color macros
-(num=`grep -E '\\\\(red|blue|green|black|b|i[^mc])' **/*.dm | wc -l`; echo "$num escapes (expecting ${MACRO_COUNT} or less)"; [ $num -le ${MACRO_COUNT} ])
+(num=`grep -E '\\\\(red|blue|green|black|b|i[^mc])' **/*.dm | wc -l`; echo "$num escapes (expecting 0)"; [ $num -le 0 ])
 retVal=$?
 if [ $retVal -ne 0 ]; then
   echo -e "${RED}Do not use any byond color macros (such as \blue), they are deprecated.${NC}"

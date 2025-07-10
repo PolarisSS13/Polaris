@@ -3,8 +3,8 @@ name: Autochangelog
 on:
   pull_request_target:
     types: closed
-    branches:
-      - master
+    branches: [ "master" ]
+  workflow_dispatch: # manual trigger
 
 env:
   BASENAME: "polaris"
@@ -12,19 +12,22 @@ env:
 jobs:
   autochangelog:
     name: Autochangelog
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     if: github.event.pull_request.merged == true
     permissions:
       contents: write
     steps:
-      - uses: /actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: master
+
       - name: Update repository to master
         run: git pull "origin" master
+
       - name: Ensure +x on CI directory
         run: |
           chmod -R +x ./tools/ci
+
       - name: Generate Changelog
         run: |
           pip install pyyaml
@@ -36,7 +39,8 @@ jobs:
           python tools/GenerateChangelog/ss13_genchangelog.py \
             html/changelog.html \
             html/changelogs
-      - uses: stefanzweifel/git-auto-commit-action@v5
+
+      - uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0
         with:
           commit_message: Automatic changelog generation for ${{ github.events.pull_request.number }}
           branch: ${{ github.events.pull_request.base }}

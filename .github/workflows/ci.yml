@@ -1,32 +1,57 @@
 name: CI
+
+permissions:
+  contents: read
+
 on:
-  pull_request:
-    branches:
-      - master
+  push: # any push (direct, merge, etc)
+  pull_request: # any pull request open / update
+  workflow_dispatch: # manual trigger
 
 env:
   BASENAME: "polaris"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
+  pre_flight:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: paths-filter
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
+        id: filter
+        with:
+          filters: .github/workflow-config/preflight-filters.yml
+    outputs:
+      dm: ${{ steps.filter.outputs.dm }}
+      tgui: ${{ steps.filter.outputs.tgui }}
+
   file_tests:
     name: Run Linters
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
+    needs: pre_flight
     steps:
       - uses: actions/checkout@v4
       - name: Ensure +x on CI directory
-        run: |
-          chmod -R +x ./tools/ci
+        run: chmod -R +x ./tools/ci
       - name: Install Tools
-        run: |
-          bash tools/ci/install_build_deps.sh
-      - name: Run Tests
-        run: |
-          tools/ci/validate_files.sh
-          tools/ci/build_tgui.sh
+        run: bash tools/ci/install_build_deps.sh
+      - name: Run DM Tests
+        if: needs.pre_flight.outputs.dm == 'true'
+        run: tools/ci/validate_files.sh
+      - name: Run TGUI Tests
+        if: needs.pre_flight.outputs.tgui == 'true'
+        run: tools/ci/build_tgui.sh
 
   dreamchecker:
     name: DreamChecker
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
+    needs: pre_flight
+    if: needs.pre_flight.outputs.dm == 'true'
     steps:
       - uses: actions/checkout@v4
 
@@ -47,29 +72,36 @@ jobs:
           ~/dreamchecker > ${GITHUB_WORKSPACE}/output-annotations.txt 2>&1
 
       - name: Annotate Linter
-        uses: yogstation13/DreamAnnotate@v2
+        uses: yogstation13/DreamAnnotate@8ef04ef7fbb4ac63ee2daca222af91599e0af5e1
         if: always()
         with:
           outputFile: output-annotations.txt
 
   unit_tests:
     name: Integration Tests
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
+    needs: pre_flight
+    if: needs.pre_flight.outputs.dm == 'true'
     steps:
       - uses: actions/checkout@v4
+
       - name: Ensure +x on CI directory
         run: |
           chmod -R +x ./tools/ci
+
       - name: Setup Cache
         uses: actions/cache@v4
         with:
           path: $HOME/BYOND
           key: ${{ runner.os }}-byond
-      - name: Install RUST_G Dependencies
+
+      - name: Install RUST_G
         run: |
+          ./tools/ci/install_rustg.sh
           sudo dpkg --add-architecture i386
           sudo apt update || true
-          sudo apt install libc6:i386 libgcc1:i386 libstdc++6:i386 libssl1.1:i386 zlib1g:i386
+          sudo apt install zlib1g-dev:i386
+
       - name: Unit Tests
         run: |
           tools/ci/install_byond.sh
@@ -78,6 +110,7 @@ jobs:
           TEST_DEFINE: "UNIT_TEST"
           TEST_FILE: "code/_unit_tests.dm"
           RUN: "1"
+
       - name: Compile POIs (no run)
         run: |
           tools/ci/install_byond.sh
@@ -86,6 +119,7 @@ jobs:
           TEST_DEFINE: "MAP_TEST"
           TEST_FILE: "code/_map_tests.dm"
           RUN: "0"
+
       - name: Compile away missions (no run)
         run: |
           tools/ci/install_byond.sh
