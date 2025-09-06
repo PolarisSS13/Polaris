@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: paths-filter
         uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
         id: filter
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-24.04
     needs: pre_flight
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Ensure +x on CI directory
         run: chmod -R +x ./tools/ci
       - name: Install Tools
@@ -53,7 +53,7 @@ jobs:
     needs: pre_flight
     if: needs.pre_flight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Cache SpacemanDMM
         uses: actions/cache@v4
@@ -83,7 +83,7 @@ jobs:
     needs: pre_flight
     if: needs.pre_flight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Ensure +x on CI directory
         run: |
