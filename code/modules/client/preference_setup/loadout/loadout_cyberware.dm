@@ -32,6 +32,9 @@
 /datum/gear/utility/implant/language
 	cost = 2
 	exploitable = 0
+	display_name = "vocal synthesizer, GalComm"
+	description = "A surgically implanted vocal synthesizer which allows the owner to speak GalCom, if they know it."
+	path = /obj/item/implant/language
 
 /datum/gear/utility/implant/language/eal
 	display_name = "vocal synthesizer, EAL"

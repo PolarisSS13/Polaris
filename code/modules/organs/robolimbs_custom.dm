@@ -10,7 +10,7 @@
 	company = "Uesseka Prototyping Ltd."
 	desc = "This limb seems meticulously hand-crafted, and distinctly Unathi in design."
 	icon = 'icons/mob/human_races/cyberlimbs/_fluff_vr/rahboop.dmi'
-	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT, SPECIES_NABBER, SPECIES_NABBER_MONARCH)
 	species_alternates = list(SPECIES_HUMAN = "NanoTrasen")
 	suggested_species = SPECIES_UNATHI
 	blood_color = "#5e280d"
@@ -34,7 +34,7 @@
 	company = "Zeng-Hu - Tajaran"
 	desc = "This limb has a rubbery covering with basic faux fur and visible seams."
 	icon = 'icons/mob/human_races/cyberlimbs/zenghu/zenghu_taj.dmi'
-	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_ZADDAT, SPECIES_NABBER, SPECIES_NABBER_MONARCH)
 	suggested_species = SPECIES_TAJ
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
@@ -43,7 +43,7 @@
 	company = "Uesseka Prototyping Ltd. - Red"
 	desc = "This limb seems meticulously hand-crafted, and distinctly Unathi in design. This one's red!"
 	icon = 'icons/mob/human_races/cyberlimbs/rahboopred/rahboopred.dmi'
-	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT, SPECIES_NABBER, SPECIES_NABBER_MONARCH)
 	species_alternates = list(SPECIES_HUMAN = "NanoTrasen")
 	suggested_species = SPECIES_UNATHI
 	blood_color = "#5e280d"

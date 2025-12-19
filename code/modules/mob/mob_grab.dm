@@ -1,3 +1,14 @@
+// Assoc list of grab types, name=path.
+GLOBAL_LIST_EMPTY(all_grabobjects)
+
+// Grabs return a deletion flag in their initialize if they don't have a target and owner. Fortunately, we can still get their name before they do so.
+/hook/startup/proc/setup_grab_list()
+	for(var/path in typesof(/obj/item/grab))
+		var/obj/G = new path
+		GLOB.all_grabobjects[G.name] = path
+
+	return TRUE
+
 #define UPGRADE_COOLDOWN	40
 #define UPGRADE_KILL_TIMER	100
 
@@ -16,7 +27,7 @@
 			G.reset_kill_state() //no wandering across the station/asteroid while choking someone
 
 /obj/item/grab
-	name = "grab"
+	name = GRAB_NORMAL
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "reinforce"
 	atom_flags = EMPTY_BITFIELD

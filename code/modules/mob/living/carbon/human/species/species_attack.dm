@@ -13,6 +13,19 @@
 	eye_attack_text = "a tendril"
 	eye_attack_text_victim = "a tendril"
 
+/datum/unarmed_attack/nabber
+	attack_verb = list("mauled", "slashed", "struck", "pierced")
+	attack_noun = list("forelimb")
+	damage = 8
+	shredding = TRUE
+	sharp = TRUE
+	edge = TRUE
+	eye_attack_text = "a forelimb"
+	eye_attack_text_victim = "a forelimb"
+	attack_name = "forelimb slash"
+	attack_sound = 'sound/weapons/slash.ogg'
+	miss_sound = 'sound/weapons/slashmiss.ogg'
+
 /datum/unarmed_attack/claws
 	attack_name = "claws"
 	attack_verb = list("scratched", "clawed", "slashed")

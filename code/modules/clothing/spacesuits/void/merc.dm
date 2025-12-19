@@ -9,6 +9,14 @@
 	camera_networks = list(NETWORK_MERCENARY)
 	light_overlay = "helmet_light_green" //todo: species-specific light overlays
 
+	sprite_sheets_refit = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi',
+		SPECIES_TAJ = 'icons/mob/species/tajaran/helmet.dmi',
+		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/head_space.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/head_space.dmi'
+		)
+
 /obj/item/clothing/suit/space/void/merc
 	icon_state = "rig-syndie"
 	name = "blood-red voidsuit"
@@ -21,6 +29,14 @@
 	breach_threshold = 16 //Extra Thicc
 	resilience = 0.05 //Military Armor
 
+	sprite_sheets_refit = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/suit.dmi',
+		SPECIES_TAJ = 'icons/mob/species/tajaran/suit.dmi',
+		SPECIES_SKRELL = 'icons/mob/species/skrell/suit.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/suit_space.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/suit_space.dmi'
+		)
+
 /obj/item/clothing/head/helmet/space/void/merc/fire
 	icon_state = "rig0-firebug"
 	name = "soot-covered voidsuit helmet"
@@ -31,6 +47,14 @@
 	max_pressure_protection = 20* ONE_ATMOSPHERE
 	siemens_coefficient = 0.7
 	light_overlay = "helmet_light_fire"
+
+	sprite_sheets_refit = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi',
+		SPECIES_TAJ = 'icons/mob/species/tajaran/helmet.dmi',
+		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/head_space.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/head_space.dmi'
+		)
 
 /obj/item/clothing/suit/space/void/merc/fire
 	icon_state = "rig-firebug"
@@ -44,3 +68,11 @@
 	siemens_coefficient = 0.7
 	breach_threshold = 18 //Super Extra Thicc
 	slowdown = 1
+
+	sprite_sheets_refit = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/suit.dmi',
+		SPECIES_TAJ = 'icons/mob/species/tajaran/suit.dmi',
+		SPECIES_SKRELL = 'icons/mob/species/skrell/suit.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/suit_space.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/suit_space.dmi'
+		)
