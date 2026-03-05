@@ -1,0 +1,105 @@
+<h1>Welcome to Nova Station 13!</h1>
+
+<p>
+Welcome aboard and thank you for joining <b>Nova Station 13</b>, a community-driven server built by the 
+<b>TAA Gaming Community</b>. Whether you are a veteran crew member or completely new to the world of 
+Space Station 13, we are glad to have you here and hope you enjoy your time on the station.
+</p>
+
+<h2>About This Server</h2>
+
+<p>
+Nova Station 13 is currently running a <b>modified version of the Baystation12 SS13 codebase</b>. 
+The Baystation12 project is one of the most well-known and respected codebases within the 
+Space Station 13 community, known for its deep roleplay mechanics, immersive gameplay systems, 
+and complex station simulation. Our server builds upon that foundation while introducing our 
+own custom changes, features, and improvements over time.
+</p>
+
+<p>
+For more information about the original project, you can visit:
+<br>
+<a href="https://baystation12.net/">https://baystation12.net/</a>
+</p>
+
+<h2>Server Development Status</h2>
+
+<p>
+Please be aware that <b>Nova Station 13 is currently a Work In Progress (WIP)</b>. Many systems, 
+features, and mechanics are still under active development. Because of this, you may occasionally 
+experience bugs, unfinished content, or experimental features that are still being tested.
+</p>
+
+<p>
+Our goal is to build a stable, fun, and community-focused SS13 environment. As development 
+continues, the server will receive regular updates, improvements, balance changes, and new content.
+Your patience and feedback during this early phase are greatly appreciated.
+</p>
+
+<h2>Community & Discord</h2>
+
+<p>
+The official <b>TAA Gaming Community Discord server</b> is currently being prepared and will 
+be opened to the public soon. Once the Discord is ready, this Message of the Day (MOTD) will 
+be updated with the official invite link.
+</p>
+
+<p>
+At that time, a <b>Discord button will also be added to the in-game UI</b> to make joining the 
+community easier for all players.
+</p>
+
+<h2>Server Rules (Temporary Notice)</h2>
+
+<p>
+Since Nova Station 13 is a brand new server, we do not yet have a finalized and fully documented 
+rule set in place. However, we ask all players to follow a few basic guidelines until the official 
+rules are published.
+</p>
+
+<ul>
+<li>Use common sense when interacting with other players.</li>
+<li>Respect fellow crew members and staff.</li>
+<li>Do not intentionally grief, exploit, or ruin the gameplay experience for others.</li>
+<li>Play fair and help maintain a fun and welcoming environment.</li>
+<li>In simple terms: <b>Don't be a jerk.</b></li>
+</ul>
+
+<p>
+Once the server grows and development progresses further, a full rule system and moderation 
+structure will be introduced.
+</p>
+
+<h2>Helping With Development</h2>
+
+<p>
+Nova Station 13 is a community-driven project, and we welcome assistance from anyone interested 
+in helping improve the server. Whether you have experience with coding, mapping, testing, bug 
+reporting, or simply providing feedback, your help can make a real difference.
+</p>
+
+<p>
+If you would like to contribute to the development of the server, please reach out to us via email:
+</p>
+
+<p>
+<b>taagamingss13@gmail.com</b>
+</p>
+
+<h2>Final Notes</h2>
+
+<p>
+Thank you for taking the time to join and support Nova Station 13 during its early development 
+stage. Every player who joins helps us grow and improve the server. We hope you enjoy exploring 
+the station, interacting with the crew, and being part of the beginning of something great.
+</p>
+
+<p>
+<b>Enjoy your stay, and welcome to Nova Station 13.</b>
+</p>
+
+<hr>
+
+<p style="font-size:12px;">
+Nova Station 13 — Operated by the TAA Gaming Community
+</p>
