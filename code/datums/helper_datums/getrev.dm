@@ -7,27 +7,26 @@ var/global/datum/getrev/revdata = new()
 	var/showinfo
 
 /datum/getrev/New()
-	var/list/head_branch = file2list(".git/HEAD", "\n")
-	if(head_branch.len)
-		branch = copytext(head_branch[1], 17)
+	if(fexists(".git/HEAD"))
+		var/list/head_branch = file2list(".git/HEAD", "\n")
+		if(head_branch.len)
+			branch = copytext(head_branch[1], 17)
 
-	var/list/head_log = file2list(".git/logs/HEAD", "\n")
-	for(var/line=head_log.len, line>=1, line--)
-		if(head_log[line])
-			var/list/last_entry = splittext(head_log[line], " ")
-			if(last_entry.len < 2)	continue
-			revision = last_entry[2]
-			// Get date/time
-			if(last_entry.len >= 5)
-				var/unix_time = text2num(last_entry[5])
-				if(unix_time)
-					date = unix2date(unix_time)
-			break
+	if(fexists(".git/logs/HEAD"))
+		var/list/head_log = file2list(".git/logs/HEAD", "\n")
+		for(var/line=head_log.len, line>=1, line--)
+			if(head_log[line])
+				var/list/last_entry = splittext(head_log[line], " ")
+				if(last_entry.len < 2)	continue
+				revision = last_entry[2]
+				// Get date/time
+				if(last_entry.len >= 5)
+					var/unix_time = text2num(last_entry[5])
+					if(unix_time)
+						date = unix2date(unix_time)
+				break
 
-	to_world_log("Running revision:")
-	to_world_log(branch)
-	to_world_log(date)
-	to_world_log(revision)
+	to_world_log("Running revision: [revision ? revision : "unknown"]")
 
 /client/verb/showrevinfo()
 	set category = "OOC"

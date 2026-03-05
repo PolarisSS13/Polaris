@@ -660,8 +660,10 @@ function start_vue() {
 
 				let category = "vc_unsorted"; //What we use if the classes aren't anything we know.
 				if(!evaluating) return category;
+				let matches = evaluating.matches || evaluating.msMatchesSelector || evaluating.webkitMatchesSelector || evaluating.mozMatchesSelector;
+				if(!matches) return category;
 				this.type_table.find( function(type) {
-					if(evaluating.msMatchesSelector(type.matches)) {
+					if(matches.call(evaluating, type.matches)) {
 						category = type.becomes;
 						return true;
 					}
@@ -804,12 +806,24 @@ function system_message(message) {
 
 //This is the other direction of communication, to push a Topic message back
 function push_Topic(topic_uri) {
-	window.location = '?_src_=chat&proc=' + topic_uri; //Yes that's really how it works.
+	// Newer embedded webviews are less reliable with relative URL Topic navigation.
+	// Prefer explicit byond:// transport and fall back to legacy relative form.
+	var topic = "_src_=chat&proc=" + topic_uri;
+	try {
+		window.location = "byond://?" + topic;
+	} catch (err) {
+		window.location = "?" + topic;
+	}
 }
 
 // Send the showingnum back to byond
 function push_Topic_showingnum(topic_num) {
-	window.location = '?_src_=chat&showingnum=' + topic_num;
+	var topic = "_src_=chat&showingnum=" + topic_num;
+	try {
+		window.location = "byond://?" + topic;
+	} catch (err) {
+		window.location = "?" + topic;
+	}
 }
 
 //Tells byond client to focus the main map window.
@@ -878,7 +892,7 @@ function send_client_data() {
 		cid: get_storage("cid"),
 		ckey: get_storage("ckey")
 	};
-	push_Topic("ident&param[clientdata]="+JSON.stringify(client_data));
+	push_Topic("ident&param[clientdata]="+encodeURIComponent(JSON.stringify(client_data)));
 }
 
 //Newer localstorage methods
@@ -936,6 +950,7 @@ function get_cookie(key, deffo) {
 		cookie_object[left] = right; //Stick into object
 	});
 	candidates.cookie = cookie_object[key]; //Return value of that key in our object (or undefined)
+	return candidates.cookie;
 }
 
 // Button Controls that need background-color and text-color set.

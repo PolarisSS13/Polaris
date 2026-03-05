@@ -43,6 +43,6 @@
 
 #elif !defined(MAP_OVERRIDE)
 
-	#warn A map has already been included, ignoring Cynosure
+	#warn A map has already been included, ignoring Nova
 
 #endif

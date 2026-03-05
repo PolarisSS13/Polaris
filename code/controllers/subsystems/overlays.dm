@@ -79,6 +79,9 @@ SUBSYSTEM_DEF(overlays)
 	for (var/atom/entry as anything in sources)
 		if (!entry)
 			continue
+		else if (islist(entry))
+			// Nested overlay lists are valid input; flatten them safely.
+			result += GetAppearanceList(subject, entry)
 		else if (istext(entry))
 			result += GetStateAppearance(icon, entry)
 		else if (isicon(entry))

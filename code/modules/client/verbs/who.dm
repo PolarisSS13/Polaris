@@ -63,16 +63,21 @@
 	var/modmsg = ""
 	var/devmsg = ""
 	var/eventMmsg = ""
+	var/eventStaffMentorMsg = ""
 	var/num_mods_online = 0
 	var/num_admins_online = 0
 	var/num_devs_online = 0
 	var/num_event_managers_online = 0
+	var/num_event_staff_mentors_online = 0
 	for(var/client/C in admins)
 		var/temp = ""
-		var/category = R_ADMIN
+		var/category = 0
+		var/rank_text = lowertext("[C.holder?.rank]")
+		var/is_event_or_mentor = check_rights(R_EVENT, FALSE, C) || findtext(rank_text, "+event") || findtext(rank_text, "mentor")
 		if(check_rights(R_ADMIN, FALSE, C)) // admins
 			if(C.holder.fakekey && !check_rights_for(src, R_ADMIN|R_MOD))	// Only admins and mods can see stealthmins
 				continue
+			category = R_ADMIN
 			num_admins_online++
 		else if(check_rights(R_MOD, FALSE, C)) // mods
 			category = R_MOD
@@ -110,6 +115,10 @@
 			if(R_EVENT)
 				eventMmsg += temp
 
+		if(is_event_or_mentor)
+			num_event_staff_mentors_online++
+			eventStaffMentorMsg += temp
+
 	if(config.admin_irc)
 		to_chat(src, "<span class='info'>Adminhelps are also sent to IRC. If no admins are available in game try anyway and an admin on IRC may see it and respond.</span>")
 	msg = "<b>Current Admins ([num_admins_online]):</b>\n" + msg
@@ -119,6 +128,8 @@
 
 	if(config.show_devs)
 		msg += "\n<b> Current Developers ([num_devs_online]):</b>\n" + devmsg
+
+	msg += "\n<b> Current Event Staff/Mentors ([num_event_staff_mentors_online]):</b>\n" + eventStaffMentorMsg
 
 	if(config.show_event_managers)
 		msg += "\n<b> Current Event Managers ([num_event_managers_online]):</b>\n" + eventMmsg

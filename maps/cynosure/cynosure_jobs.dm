@@ -11,7 +11,7 @@ var/global/const/access_explorer = 43
 	desc = "Explorer"
 	region = ACCESS_REGION_GENERAL
 
-//Cynosure Jobs
+//Nova Jobs
 
 /datum/department/planetside
 	name = DEPARTMENT_PLANET
@@ -40,7 +40,7 @@ var/global/const/access_explorer = 43
 
 /datum/alt_title/pilot
 	title = "Pilot"
-	title_blurb = "A pilot ferries crew around in Cynosure Station's shuttle, the NTC Calvera."
+	title_blurb = "A pilot ferries crew around in Nova Station's shuttle, the NTC Calvera."
 	title_outfit = /decl/hierarchy/outfit/job/pilot
 
 /datum/job/paramedic
@@ -79,7 +79,7 @@ var/global/const/access_explorer = 43
 	access = list()
 	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/job/survivalist
-	job_description = "There are a few small groups of people living in the wilderness of Sif, and they occasionally venture to the Cynosure to trade, ask for help, or just have someone to talk to."
+	job_description = "There are a few small groups of people living in the wilderness of Sif, and they occasionally venture to the Nova to trade, ask for help, or just have someone to talk to."
 	assignable = FALSE
 	has_headset = FALSE
 	account_allowed = FALSE
@@ -238,7 +238,7 @@ var/global/const/access_explorer = 43
 
 /datum/alt_title/drake/explorer_drake
 	title = "Expedition Drake"
-	title_blurb = "The Cynosure Xenobiology department has spearheaded an effort to train some of the intelligent local wildlife to assist with Exploration field operations."
+	title_blurb = "The Nova Xenobiology department has spearheaded an effort to train some of the intelligent local wildlife to assist with Exploration field operations."
 	drake_type = /mob/living/simple_mob/animal/sif/grafadreka/trained/station
 
 /datum/alt_title/drake/wild_drake
@@ -442,7 +442,7 @@ Using <font color='#e0a000'>grab intent</font> you can pick up and drop items by
 				<p>Grafadreka (drakes) are actually pretty timid and easily spooked despite their size and appearance. In the wild, they hunt in groups and will hit and run using their stunning spit, avoiding direct engagement unless given no other option. They seem to have an inherent social structure, with a dominant packmember taking the lead but the pack as a whole working as a team. May be useful for training?</p>
 				<p>Instinctive aggression towards spiders & smaller Sivian wildlife - can be trained out of them with difficulty. Wild populations can live entirely off spider meat or carrion.</p>
 				<p>Quite social animals - will seek out humans or other creatures in the absence of packmembers just for company. Very food motivated! Seem to enjoy working with personnel out in the field or hanging out in social areas like the bar.</p>
-				<p>Egg-layers - nests of 1-3 eggs in caves north of Cynosure - influenced by different environment? <i>Terrible</i> parents, hatchlings always wandering off & getting eaten by spiders.</p>
+				<p>Egg-layers - nests of 1-3 eggs in caves north of Nova - influenced by different environment? <i>Terrible</i> parents, hatchlings always wandering off & getting eaten by spiders.</p>
 				<h2>Training results</h2>
 				<p>Signal training very successful - almost every drake responds positively to audible cues like summon whistles, vocal cues like 'up' and 'down' - strong indicators of language understanding.</p>
 				<p>Can be encouraged to be careful with spitting - related to pack hunting instincts? - not always reliable.</p>

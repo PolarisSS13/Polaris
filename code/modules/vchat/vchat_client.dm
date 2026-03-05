@@ -7,7 +7,7 @@ GLOBAL_LIST_INIT(vchatFiles, list(
 	"code/modules/vchat/css/ss13styles.css",
 	"code/modules/vchat/js/polyfills.js",
 	"code/modules/vchat/js/vue.min.js",
-	"code/modules/vchat/js/vchat.js"
+	"code/modules/vchat/js/vchat_516.js"
 ))
 
 // The to_chat() macro calls this proc
@@ -271,10 +271,38 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 /proc/icon2base64(var/icon/icon, var/iconKey = "misc")
 	if (!isicon(icon)) return FALSE
 
-	GLOB.iconCache[iconKey] << icon
-	var/iconData = GLOB.iconCache.ExportText(iconKey)
-	var/list/partial = splittext(iconData, "{")
-	return replacetext(copytext(partial[2], 3, -5), "\n", "")
+	var/savefile/cache = GLOB.iconCache
+	if(!istype(cache))
+		fdel("data/iconCache.sav")
+		cache = new("data/iconCache.sav")
+		GLOB.iconCache = cache
+
+	// Savefiles can choke on raw icon keys containing path separators/punctuation on newer BYOND.
+	// Hash to a stable safe key before writing.
+	var/cache_key = "i_[md5("[iconKey]")]"
+
+	try
+		cache[cache_key] << icon
+		var/iconData = cache.ExportText(cache_key)
+		if(!istext(iconData))
+			return FALSE
+		var/list/partial = splittext(iconData, "{")
+		if(!partial || partial.len < 2)
+			return FALSE
+		return replacetext(copytext(partial[2], 3, -5), "\n", "")
+	catch
+		// Recover from a bad savefile state and retry once.
+		fdel("data/iconCache.sav")
+		cache = new("data/iconCache.sav")
+		GLOB.iconCache = cache
+		cache[cache_key] << icon
+		var/iconData = cache.ExportText(cache_key)
+		if(!istext(iconData))
+			return FALSE
+		var/list/partial = splittext(iconData, "{")
+		if(!partial || partial.len < 2)
+			return FALSE
+		return replacetext(copytext(partial[2], 3, -5), "\n", "")
 
 /proc/expire_bicon_cache(key)
 	if(GLOB.bicon_cache[key])
@@ -418,3 +446,4 @@ var/global/to_chat_src
 			spawn(1 MINUTE)
 				if(!fdel(o_file))
 					log_debug("Warning: [ckey]'s chatlog could not be deleted one minute after file transfer was initiated. It is located at 'data/chatlog_tmp/[ckey]_chat_log' and will need to be manually removed.")
+

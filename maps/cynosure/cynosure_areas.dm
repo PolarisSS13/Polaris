@@ -129,7 +129,7 @@
 	name = "Depths"
 	icon_state = "unexplored_deep"
 
-//Cynosure Station
+//Nova Station
 
 /area/surface/station
 	ambience = AMBIENCE_GENERIC
@@ -1365,7 +1365,7 @@
 	icon_state = "Tactical"
 	ambience = AMBIENCE_HIGHSEC
 
-//Turbolift Cynosure
+//Turbolift Nova
 
 /area/turbolift
 	name = "\improper Turbolift"
@@ -1618,7 +1618,7 @@
 	base_turf = /turf/space
 
 /area/shuttle/response_ship/arrivals_dock
-	name = "\improper docked with Cynosure"
+	name = "\improper docked with Nova"
 	icon_state = "shuttle"
 
 /area/shuttle/response_ship/orbit

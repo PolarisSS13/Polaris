@@ -161,7 +161,7 @@
 	<br></br>\
 	While many systems in the Almach Rim have already passed similar bills, this is the first system so close to Sol to have done so. More\
 	concerning still is NanoTrasen's business practice regarding the intelligences: much like their positronic lines, sources within the\
-	company indicate that they will be \"farmed out\" to employees of the corporation and residents of their Northern Star and Cynosure\
+	company indicate that they will be \"farmed out\" to employees of the corporation and residents of their Northern Star and Nova\
 	habitation complexes. Quote our source, who wishes to remain anonymous, \"\[we\] call the program 'Lend-Lease', sometimes. The whole idea\
 	is that we only have to pay the\ cost of the promethean core, which is about 2000-3000 thalers after startup costs, and we still get\
 	the data we need while \[our\] own employees pay to feed 'em and put hours into raising them.\"\
@@ -1351,10 +1351,10 @@
 	The new Site Union Representative role will be elected for each proposed location by local employees on a quarterly basis, and will advocate for policy amendment and dispute resolution on a per-location basis. Campaigning for union positions is expected to begin on the 29th of January, with elections taking place over the company network after a two week period."
 
 /datum/lore/codex/page/article118
-	name = "02/19/75 - Cynosure Bulletin: Winner of Site Union Representative Announced"
-	data = "We are pleased to announce that after a three week introductory campaigning period, the first winner of Cynosure Station's Site Union Representative position has been determined. \
+	name = "02/19/75 - Nova Bulletin: Winner of Site Union Representative Announced"
+	data = "We are pleased to announce that after a three week introductory campaigning period, the first winner of Nova Station's Site Union Representative position has been determined. \
 	<br><br>\
-	Cynosure Station will be represented by: Chef Parker Stephenson.\
+	Nova Station will be represented by: Chef Parker Stephenson.\
 	<br><br>\
 	Requests, suggestions and concerns regarding the operation of your site should be directed to this representative and will be strongly considered for implementation if crew support is apparent.\
 	<br><br>\
@@ -1377,11 +1377,11 @@
 	name = "06/14/75 - Seventeen Arrested In Drammen Anomaly Sting"
 	data = "The SifGuard Police Division has confirmed the arrest of seventeen individuals in connection to a Sif Anomalous Region artefact smuggling scheme operating out of the city of Drammen, in central Londuneyja. The string of armed raids, took place over the early morning of the 14th and come as part of a push for stronger legal action against the growing artefact trade in the region.\
 	<br><br>\
-	The identities of many of those arrested remains unknown, though sources close to the operation have suggested ties to both the Russian Mafia, and the Golden Tiger Syndicate. Havdid Kindler, a representative for NanoTrasen's security operations informed the Vir News Network that \"no current NanoTrasen employees have been implicated in this case\", and that he did not believe that any individual employed at the company's largest research base, Cynosure Station which is located in relative proximity to Drammen, were currently under investigation.\
+	The identities of many of those arrested remains unknown, though sources close to the operation have suggested ties to both the Russian Mafia, and the Golden Tiger Syndicate. Havdid Kindler, a representative for NanoTrasen's security operations informed the Vir News Network that \"no current NanoTrasen employees have been implicated in this case\", and that he did not believe that any individual employed at the company's largest research base, Nova Station which is located in relative proximity to Drammen, were currently under investigation.\
 	<br><br>\
 	NanoTrasen has strongly condemned illegal expeditions into the SAR since the establishment of the perimeter in 2568. The company have stated that they have been collaborating closely with the SGPD over the past several months, but that they could not comment further on ongoing operations. According to Kindler, the harsh treatment is \"Not only a matter of intellectual property, but of public safety. NanoTrasen's research operations are uniquely equipped to safely investigate the phenomena of the SAR, and the careful control of abnormal material exiting the perimeter ensures minimal risk of injury of death in the wider population.\" Death and disfigurement among illegal artefact smugglers is a common occurrence, though exact injury details and figures for individuals working under NanoTrasen supervision remain confidential.\
 	<br><br>\
-	Mr. Kindler has thanked the SifGuard, Hedberg-Hammarstrom corporation, and the people of Drammen for their close cooperation with the company. Cynosure Station management declined to comment."
+	Mr. Kindler has thanked the SifGuard, Hedberg-Hammarstrom corporation, and the people of Drammen for their close cooperation with the company. Nova Station management declined to comment."
 
 /datum/lore/codex/page/article121
 	name = "07/05/75 - Naval Assets Scramble As Raphael Besieged By Vox Warfleet"

@@ -1,4 +1,4 @@
-//Cynosure Shuttles
+//Nova Shuttles
 
 // Arrivals Shuttle
 /datum/shuttle/autodock/ferry/arrivals/cynosure
@@ -17,7 +17,7 @@
 	base_turf = /turf/space
 
 /obj/effect/shuttle_landmark/cynosure/arrivals_station
-	name = "Cynosure Arrivals Pad"
+	name = "Nova Arrivals Pad"
 	landmark_tag = "arrivals_station"
 	docking_controller = "arrivals_dock"
 	base_turf = /turf/simulated/floor/concrete/sif/planetuse
@@ -70,8 +70,8 @@
 	docking_controller_tag = "centcom_shuttle"
 	ceiling_type = /turf/simulated/floor/reinforced
 	announcer = "Automated Traffic Control"
-	arrival_message = "Attention, Transport Shuttle is approaching Cynosure Station."
-	departure_message = "Attention, Transport Shuttle is departing Cynosure Station."
+	arrival_message = "Attention, Transport Shuttle is approaching Nova Station."
+	departure_message = "Attention, Transport Shuttle is departing Nova Station."
 
 //Administration
 
@@ -95,8 +95,8 @@
 	docking_controller_tag = "admin_shuttle"
 	ceiling_type = /turf/simulated/floor/reinforced
 	announcer = "Automated Traffic Control"
-	arrival_message = "Attention, Administration Shuttle is approaching Cynosure Station."
-	departure_message = "Attention, Administration Shuttle is departing Cynosure Station."
+	arrival_message = "Attention, Administration Shuttle is approaching Nova Station."
+	departure_message = "Attention, Administration Shuttle is departing Nova Station."
 
 //ERT
 
@@ -124,8 +124,8 @@
 	docking_controller_tag = "response_shuttle"
 	ceiling_type = /turf/simulated/floor/reinforced
 	announcer = "Automated Traffic Control"
-	arrival_message = "Attention, the Emergency Response Team's shuttle is approaching Cynosure Station."
-	departure_message = "Attention, the Emergency Response Team's shuttle is departing Cynosure Station."
+	arrival_message = "Attention, the Emergency Response Team's shuttle is approaching Nova Station."
+	departure_message = "Attention, the Emergency Response Team's shuttle is departing Nova Station."
 
 //Trader
 
@@ -147,8 +147,8 @@
 	docking_controller_tag = "trade_shuttle"
 	ceiling_type = /turf/simulated/floor/reinforced
 	announcer = "Automated Traffic Control"
-	arrival_message = "Attention, Beruang is approaching Cynosure Station."
-	departure_message = "Attention, Beruang is departing Cynosure Station."
+	arrival_message = "Attention, Beruang is approaching Nova Station."
+	departure_message = "Attention, Beruang is departing Nova Station."
 
 //Ninja
 
@@ -177,8 +177,8 @@
 	docking_controller_tag = "ninja_shuttle"
 	ceiling_type = /turf/simulated/floor/reinforced
 	announcer = "Automated Traffic Control"
-	arrival_message = "Attention, unknown shuttle is approaching Cynosure Station."
-	departure_message = "Attention, unknown shuttle is departing Cynosure Station."
+	arrival_message = "Attention, unknown shuttle is approaching Nova Station."
+	departure_message = "Attention, unknown shuttle is departing Nova Station."
 
 //Heist
 
@@ -204,8 +204,8 @@
 	docking_controller_tag = "skipjack_shuttle"
 	ceiling_type = /turf/simulated/floor/reinforced
 	announcer = "Automated Traffic Control"
-	arrival_message = "Attention, unknown shuttle is approaching Cynosure Station."
-	departure_message = "Attention, unknown shuttle is departing Cynosure Station."
+	arrival_message = "Attention, unknown shuttle is approaching Nova Station."
+	departure_message = "Attention, unknown shuttle is departing Nova Station."
 
 //Mercenary
 
@@ -231,8 +231,8 @@
 	docking_controller_tag = "merc_shuttle"
 	ceiling_type = /turf/simulated/floor/reinforced
 	announcer = "Automated Traffic Control"
-	arrival_message = "Attention, unknown shuttle is approaching Cynosure Station."
-	departure_message = "Attention, unknown shuttle is departing Cynosure Station."
+	arrival_message = "Attention, unknown shuttle is approaching Nova Station."
+	departure_message = "Attention, unknown shuttle is departing Nova Station."
 
 /obj/machinery/computer/shuttle_control/multi/mercenary_elite
 	name = "mercenary ship control console"
@@ -256,8 +256,8 @@
 	docking_controller_tag = "merc_elite_shuttle"
 	ceiling_type = /turf/simulated/floor/reinforced
 	announcer = "Automated Traffic Control"
-	arrival_message = "Attention, unknown shuttle is approaching Cynosure Station."
-	departure_message = "Attention, unknown shuttle is departing Cynosure Station."
+	arrival_message = "Attention, unknown shuttle is approaching Nova Station."
+	departure_message = "Attention, unknown shuttle is departing Nova Station."
 
 //Escape Pods
 
@@ -281,7 +281,7 @@
 	base_turf = /turf/space
 
 /obj/effect/shuttle_landmark/cynosure/escape/station
-	name = "Cynosure Departures Pad"
+	name = "Nova Departures Pad"
 	landmark_tag = "escape_station"
 	docking_controller = "escape_dock"
 	base_turf = /turf/simulated/floor/concrete/sif/planetuse
@@ -379,7 +379,7 @@ ESCAPE_POD(1)
 	landmark_tag = "large_escape_pod2_transit"
 	landmark_flags = LANDMARK_CREATES_SAFE_SITE
 
-//Cynosure Station Docks
+//Nova Station Docks
 
 /obj/effect/shuttle_landmark/cynosure/pads/pad3
 	name = "Shuttle Pad Three"
@@ -396,7 +396,7 @@ ESCAPE_POD(1)
 	base_turf = /turf/simulated/floor/concrete/sif/planetuse
 
 /obj/effect/shuttle_landmark/cynosure/pads/perimeter
-	name = "Cynosure Perimeter"
+	name = "Nova Perimeter"
 	landmark_tag = "nav_perimeter_cynosure"
 	docking_controller = "pad4"
 	base_area = /area/surface/outside/plains/station

@@ -1,4 +1,4 @@
-// Area defines on Cynosure differ from previous maps, so these have to be overriden with map-specific lists.
+// Area defines on Nova differ from previous maps, so these have to be overriden with map-specific lists.
 /datum/event2/event/prison_break/bridge
 	area_types_to_break = list(
 		/area/surface/station/command/operations,

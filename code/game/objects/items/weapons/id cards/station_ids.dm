@@ -331,7 +331,7 @@
 
 /obj/item/card/id/union
 	name = "union representative ID"
-	desc = "An access card issued to the elected NanoTrasen Union Representative of Cynosure."
+	desc = "An access card issued to the elected NanoTrasen Union Representative of Nova."
 	assignment = "Union Representative"
 	access = list(access_union)
 

@@ -5,7 +5,7 @@
 	lift_size_y = 4
 
 /obj/turbolift_map_holder/cynosure/west
-	name = "Cynosure turbolift map placeholder - West"
+	name = "Nova turbolift map placeholder - West"
 	dir = EAST
 	depth = 3
 
@@ -17,7 +17,7 @@
 
 /obj/turbolift_map_holder/cynosure/center
 	icon = 'icons/obj/turbolift_preview_3x3.dmi'
-	name = "Cynosure turbolift map placeholder - Center"
+	name = "Nova turbolift map placeholder - Center"
 	dir = WEST
 	depth = 3
 	lift_size_x = 3
@@ -30,7 +30,7 @@
 		)
 
 /obj/turbolift_map_holder/cynosure/cargo
-	name = "Cynosure turbolift map placeholder - Cargo"
+	name = "Nova turbolift map placeholder - Cargo"
 	dir = WEST
 
 	areas_to_use = list(
@@ -39,7 +39,7 @@
 		)
 
 /obj/turbolift_map_holder/cynosure/engineering
-	name = "Cynosure turbolift map placeholder - Engineering"
+	name = "Nova turbolift map placeholder - Engineering"
 	dir = SOUTH
 	depth = 3
 
@@ -51,7 +51,7 @@
 
 /obj/turbolift_map_holder/cynosure/medbay
 	icon = 'icons/obj/turbolift_preview_3x3.dmi'
-	name = "Cynosure turbolift map placeholder - Medbay"
+	name = "Nova turbolift map placeholder - Medbay"
 	dir = EAST
 	depth = 3
 	lift_size_x = 3
@@ -64,7 +64,7 @@
 		)
 
 /obj/turbolift_map_holder/cynosure/sci
-	name = "Cynosure turbolift map placeholder - Science"
+	name = "Nova turbolift map placeholder - Science"
 	dir = EAST
 
 	areas_to_use = list(
@@ -74,7 +74,7 @@
 
 /obj/turbolift_map_holder/cynosure/sec
 	icon = 'icons/obj/turbolift_preview_3x3.dmi'
-	name = "Cynosure turbolift map placeholder - Security"
+	name = "Nova turbolift map placeholder - Security"
 	dir = NORTH
 	lift_size_x = 3
 	lift_size_y = 3

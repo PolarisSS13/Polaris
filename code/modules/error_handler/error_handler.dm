@@ -98,7 +98,7 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 	log_error("\[[time_stamp()]] Runtime in [e.file],[e.line]: [e]")
 	for(var/line in desclines)
 		log_error(line)
-	if(error_cache)
+	if(istype(error_cache))
 		error_cache.logError(e, desclines, e_src = e_src)
 
 #endif

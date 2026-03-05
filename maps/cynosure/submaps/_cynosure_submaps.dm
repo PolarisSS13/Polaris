@@ -17,7 +17,7 @@
 // in pre-determined locations. One PoI in each 'group' will always be spawned.
 
 /datum/map_template/cynosure_fixed
-	name = "Cynosure Specific Content"
+	name = "Nova Specific Content"
 	desc = "New Map New Shiny"
 
 /obj/effect/landmark/submap_position/random_subtype/cynosure_medical_basement

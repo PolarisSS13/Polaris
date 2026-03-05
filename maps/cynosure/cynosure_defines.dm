@@ -9,8 +9,8 @@
 #define Z_LEVEL_SURFACE_WILD			7
 
 /datum/map/cynosure
-	name = "Cynosure"
-	full_name = "Cynosure Station"
+	name = "Nova"
+	full_name = "Nova Station"
 	path = "cynosure"
 
 	lobby_screens = list('maps/cynosure/title_cynosure.png')
@@ -32,8 +32,8 @@
 
 	zlevel_datum_type = /datum/map_z_level/cynosure
 
-	station_name  = "Cynosure Station"
-	station_short = "Cynosure"
+	station_name  = "Nova Station"
+	station_short = "Nova"
 	dock_name     = "NCS Northern Star" // Still the centcom!
 	boss_name     = "Central Command"
 	boss_short    = "Centcom"
@@ -42,13 +42,13 @@
 	starsys_name  = "Vir"
 	use_overmap = TRUE
 
-	shuttle_docked_message = "The scheduled shuttle to the %dock_name% has landed at Cynosure departures pad. It will depart in approximately %ETD%."
+	shuttle_docked_message = "The scheduled shuttle to the %dock_name% has landed at Nova departures pad. It will depart in approximately %ETD%."
 	shuttle_leaving_dock = "The Crew Transfer Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
-	shuttle_called_message = "A crew transfer to %dock_name% has been scheduled. The shuttle has been called. Those leaving should proceed to Cynosure Departures Pad in approximately %ETA%."
+	shuttle_called_message = "A crew transfer to %dock_name% has been scheduled. The shuttle has been called. Those leaving should proceed to Nova Departures Pad in approximately %ETA%."
 	shuttle_recall_message = "The scheduled crew transfer has been cancelled."
-	emergency_shuttle_docked_message = "The Emergency Shuttle has landed at Cynosure departures pad. You have approximately %ETD% to board the Emergency Shuttle."
+	emergency_shuttle_docked_message = "The Emergency Shuttle has landed at Nova departures pad. You have approximately %ETD% to board the Emergency Shuttle."
 	emergency_shuttle_leaving_dock = "The Emergency Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
-	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive at Cynosure departures pad in approximately %ETA%."
+	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive at Nova departures pad in approximately %ETA%."
 	emergency_shuttle_recall_message = "The emergency shuttle has been recalled."
 
 	// Networks that will show up as options in the camera monitor program

@@ -1092,8 +1092,8 @@
 	icon_state = "vines_bottom"
 
 /obj/structure/sign/bigname
-	name = "Cynosure Station"
-	desc = "An aging sign for the Cynosure Xenoarchaeological Research Station."
+	name = "Nova Station"
+	desc = "An aging sign for the Nova Xenoarchaeological Research Station."
 	icon_state = "cyno_1"
 
 /obj/structure/sign/bigname/seg_2

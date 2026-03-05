@@ -47,6 +47,11 @@
 		message_admins("Attempted use of scripts within a topic call, by [src]")
 		return
 
+	// BYOND 516+ can occasionally omit hsrc in Topic() callbacks from browser UIs.
+	// Fall back to locating src from href_list so regular and admin interfaces still route.
+	if(!hsrc && href_list["src"])
+		hsrc = locate(href_list["src"])
+
 	// Tgui Topic middleware
 	if(!tgui_Topic(href_list))
 		return

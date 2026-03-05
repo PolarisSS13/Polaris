@@ -137,7 +137,7 @@
 		/obj/item/geiger,
 		/obj/item/bodybag/cryobag)
 
-//Cynosure Paramedic Locker
+//Nova Paramedic Locker
 
 /obj/structure/closet/secure_closet/paramedic
 	name = "paramedic locker"

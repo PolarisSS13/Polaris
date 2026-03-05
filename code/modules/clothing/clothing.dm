@@ -345,6 +345,9 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	update_icon()
 
 /obj/item/clothing/gloves/mob_can_equip(mob/user, slot, disable_warning = FALSE)
+	if(!istype(user, /mob/living/carbon/human))
+		return ..()
+
 	var/mob/living/carbon/human/H = user
 
 	if(slot && slot == slot_gloves)
