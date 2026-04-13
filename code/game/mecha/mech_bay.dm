@@ -13,6 +13,7 @@
 	var/repair = 0
 	var/list/chargable_types = list(
 		/obj/mecha,
+		/mob/living/exosuit,
 		/mob/living/silicon/robot/platform
 	)
 
@@ -58,7 +59,7 @@
 	var/done = FALSE
 	var/obj/mecha/mech = charging
 	var/obj/item/cell/cell = charging.get_cell()
-	if(cell)	
+	if(cell)
 		var/t = min(charge, cell.maxcharge - cell.charge)
 		if(t > 0)
 			if(istype(mech))

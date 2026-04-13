@@ -38,6 +38,29 @@
 	charge_cost = 800
 	recharge_time = 0.5 SECONDS
 
+/obj/item/gun/energy/taser/carbine
+	name = "electrolaser carbine"
+	desc = "The NT Mk44 NL is a high capacity gun used for lesss-than-lethal takedowns. It can switch between high and low intensity stun shots."
+	icon = 'icons/obj/gun2.dmi'
+	icon_state = "tasercarbine"
+	w_class = ITEMSIZE_LARGE
+	slot_flags = SLOT_BELT|SLOT_BACK
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
+	force = 8
+	accuracy = 1
+	projectile_type = /obj/item/projectile/beam/stun
+	wielded_item_state = "tasercarbine-wielded"
+
+	firemodes = list(
+		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, charge_cost = 300),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/shock, charge_cost = 480),
+		)
+
+/obj/item/gun/energy/taser/carbine/mounted
+	name = "mounted electrolaser carbine"
+	self_recharge = TRUE
+	use_external_power = TRUE
+
 /obj/item/gun/energy/crossbow
 	name = "mini energy-crossbow"
 	desc = "A weapon favored by many mercenary stealth specialists."

@@ -669,6 +669,45 @@ CIRCUITS BELOW
 	build_path = /obj/item/circuitboard/microwave/advanced
 	sort_string = "HACAA"
 
+/datum/design/circuit/exosuit_engineering
+	name = "exosuit engineering software"
+	id = "exosoft_engi"
+	req_tech = list(TECH_DATA = 1)
+	build_path = /obj/item/weapon/circuitboard/exosystem/engineering
+	sort_string = "XABAA"
+	materials = list(MAT_GLASS = 2000, MAT_COPPER = 1500)
+
+/datum/design/circuit/exosuit_utility
+	name = "exosuit utility software"
+	id = "exosoft_utility"
+	req_tech = list(TECH_DATA = 1)
+	build_path = /obj/item/weapon/circuitboard/exosystem/utility
+	sort_string = "XABAB"
+	materials = list(MAT_GLASS = 2000, MAT_COPPER = 1500)
+
+/datum/design/circuit/exosuit_medical
+	name = "exosuit medical software"
+	id = "exosoft_medical"
+	req_tech = list(TECH_DATA = 3,TECH_BIO = 2)
+	build_path = /obj/item/weapon/circuitboard/exosystem/medical
+	sort_string = "XABAC"
+	materials = list(MAT_GLASS = 2000, MAT_COPPER = 1500)
+
+/datum/design/circuit/exosuit_weapons
+	name = "exosuit weapons software"
+	id = "exosoft_weapons"
+	req_tech = list(TECH_DATA = 4, TECH_COMBAT = 3)
+	build_path = /obj/item/weapon/circuitboard/exosystem/weapons
+	sort_string = "XABAD"
+	materials = list(MAT_GLASS = 2000, MAT_COPPER = 1500)
+
+/datum/design/circuit/exosuit_advweapons
+	name = "exosuit advweapons software"
+	id = "exosoft_advweapons"
+	req_tech = list(TECH_DATA = 4, TECH_COMBAT = 5)
+	build_path = /obj/item/weapon/circuitboard/exosystem/advweapons
+	sort_string = "XABAE"
+	materials = list(MAT_GLASS = 2000, MAT_COPPER = 1500)
 
 /* I have no idea how this was even running before, but it doesn't seem to be necessary.
 ///////////////////////////////////
