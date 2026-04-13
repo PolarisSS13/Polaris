@@ -123,3 +123,55 @@
 		/obj/item/rig_module/power_sink,
 		/obj/item/rig_module/self_destruct
 		)
+
+/*
+ *	Nabber
+ */
+
+/obj/item/rig/nabber
+	name = "alien control module"
+	desc = "This strange harness is far too large for most species you know..."
+	suit_type = "alien"
+	icon_state = "kexosuit"
+	armor = list(melee = 80, bullet = 60, laser = 60, energy = 15, bomb = 30, bio = 100, rad = 80)
+	item_flags = THICKMATERIAL | PHORONGUARD
+	siemens_coefficient = 0.2
+	offline_slowdown = 2.5
+	allowed = list(
+		/obj/item/gun,
+		/obj/item/flashlight,
+		/obj/item/tank,
+		/obj/item/suit_cooling_unit,
+		/obj/item/storage
+		)
+
+	air_type = /obj/item/tank/oxygen/red
+
+	helm_type = /obj/item/clothing/head/helmet/space/rig/nabber
+	chest_type = /obj/item/clothing/suit/space/rig/nabber
+	glove_type = /obj/item/clothing/gloves/gauntlets/rig/nabber
+	boot_type = null
+
+	sprite_sheets = list(
+		SPECIES_NABBER = 'icons/mob/species/nabber/back.dmi'
+		)
+
+/obj/item/clothing/head/helmet/space/rig/nabber
+	species_restricted = list(SPECIES_NABBER)
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+	sprite_sheets = list(
+		SPECIES_NABBER = 'icons/mob/species/nabber/head_space.dmi'
+		)
+
+/obj/item/clothing/suit/space/rig/nabber
+	species_restricted = list(SPECIES_NABBER)
+	sprite_sheets = list(
+		SPECIES_NABBER = 'icons/mob/species/nabber/suit_space.dmi'
+		)
+
+/obj/item/clothing/gloves/gauntlets/rig/nabber
+	siemens_coefficient = 0
+	species_restricted = list(SPECIES_NABBER)
+	sprite_sheets = list(
+		SPECIES_NABBER = 'icons/mob/species/nabber/gloves_space.dmi'
+		)

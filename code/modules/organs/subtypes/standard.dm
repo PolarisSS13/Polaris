@@ -360,7 +360,7 @@
 					eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
 			//They're gone!
 			else
-				eyes_icon.Blend(rgb(128,0,0), ICON_ADD)
+				eyes_icon.Blend(species ? species.blood_color : rgb(128,0,0), ICON_ADD)
 
 		//We have weird other-sorts of eyes (as we're not supposed to have eye organ, but we have HAS_EYE_COLOR species)
 		else

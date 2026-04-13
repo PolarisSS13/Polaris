@@ -16,7 +16,9 @@
 	sprite_sheets_refit = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi',
 		SPECIES_TAJ = 'icons/mob/species/tajaran/helmet.dmi',
-		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi'
+		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/head_space.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/head_space.dmi'
 		//Teshari have a general sprite sheet defined in modules/clothing/clothing.dm
 		)
 	sprite_sheets_obj = list(
@@ -46,7 +48,9 @@
 	sprite_sheets_refit = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/suit.dmi',
 		SPECIES_TAJ = 'icons/mob/species/tajaran/suit.dmi',
-		SPECIES_SKRELL = 'icons/mob/species/skrell/suit.dmi'
+		SPECIES_SKRELL = 'icons/mob/species/skrell/suit.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/suit_space.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/suit_space.dmi'
 		//Teshari have a general sprite sheet defined in modules/clothing/clothing.dm
 		)
 	sprite_sheets_obj = list(

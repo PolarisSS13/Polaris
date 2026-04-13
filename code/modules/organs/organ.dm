@@ -333,6 +333,11 @@ var/global/list/organ_cache = list()
 /obj/item/organ/proc/bruise()
 	damage = max(damage, min_bruised_damage)
 
+/obj/item/organ/proc/is_robotic()
+	if(robotic >= ORGAN_ROBOT)
+		return TRUE
+	return FALSE
+
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
 	robotic = ORGAN_ROBOT
 	src.status &= ~ORGAN_BROKEN

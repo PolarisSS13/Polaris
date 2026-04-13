@@ -9,6 +9,8 @@
 	var/toggleicon
 	action_button_name = "Toggle Hood"
 
+	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_NABBER_MONARCH)
+
 /obj/item/clothing/suit/storage/hooded/Initialize()
 	toggleicon = "[initial(icon_state)]"
 	MakeHood()

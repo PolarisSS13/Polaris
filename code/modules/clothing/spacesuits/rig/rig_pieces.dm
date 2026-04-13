@@ -15,7 +15,9 @@
 		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/head.dmi',
-		SPECIES_TESHARI = 'icons/mob/species/teshari/head.dmi'
+		SPECIES_TESHARI = 'icons/mob/species/teshari/head.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/head_space.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/head_space.dmi'
 		)
 	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_TAJ, SPECIES_UNATHI, SPECIES_PROMETHEAN, SPECIES_TESHARI) //vox, Diona, and zaddat can't use hardsuits not designed for them
 	max_pressure_protection = null
@@ -27,6 +29,12 @@
 	body_parts_covered = HANDS
 	heat_protection =    HANDS
 	cold_protection =    HANDS
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/gloves.dmi',
+		SPECIES_VOX = 'icons/mob/species/vox/gloves.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/gloves_space.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/gloves_space.dmi'
+		)
 	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_TAJ, SPECIES_UNATHI, SPECIES_PROMETHEAN, SPECIES_TESHARI)
 	gender = PLURAL
 
@@ -56,7 +64,9 @@
 		SPECIES_TAJ = 'icons/mob/species/tajaran/suit.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/suit.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/suit.dmi',
-		SPECIES_TESHARI = 'icons/mob/species/teshari/suit.dmi'
+		SPECIES_TESHARI = 'icons/mob/species/teshari/suit.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/suit_space.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/suit_space.dmi'
 		)
 	supporting_limbs = list()
 	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_TAJ, SPECIES_UNATHI, SPECIES_PROMETHEAN, SPECIES_TESHARI) //vox, Diona, and zaddat can't use hardsuits not designed for them

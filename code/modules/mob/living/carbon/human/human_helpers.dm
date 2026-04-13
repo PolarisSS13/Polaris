@@ -210,6 +210,17 @@
 
 	return FALSE
 
+/proc/make_grab(mob/living/carbon/human/attacker, mob/living/carbon/human/victim, grab_tag)
+	var/obj/item/grab/G
+	if(!grab_tag)
+		G = new attacker.current_grab_type(attacker, victim)
+	else
+		var/obj/item/grab/given_grab_type = GLOB.all_grabobjects[grab_tag]
+		G = new given_grab_type(attacker, victim)
+	if(QDELETED(G))
+		return 0
+	return G
+
 #undef HUMAN_EATING_NO_ISSUE
 #undef HUMAN_EATING_NO_MOUTH
 #undef HUMAN_EATING_BLOCKED_MOUTH

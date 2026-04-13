@@ -36,6 +36,10 @@
 	var/indicator = (faction_indicator && (other in faction_members)) ? faction_indicator : antag_indicator
 	var/image/returnimage = image('icons/mob/mob.dmi', loc = other.current, icon_state = indicator)
 	returnimage.plane = PLANE_LIGHTING_ABOVE
+	if(ishuman(other.current))
+		var/mob/living/carbon/human/H = other.current
+		returnimage.pixel_x = H.species.antaghud_offset_x
+		returnimage.pixel_y = H.species.antaghud_offset_y
 	return returnimage
 
 /datum/antagonist/proc/update_all_icons()

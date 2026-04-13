@@ -15,6 +15,9 @@
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
 #define DISFIGURED  0x4000  // Set but never checked. Remove this sometime and replace occurrences with the appropriate organ code
 
+#define GRAB_NORMAL		"grab"
+#define GRAB_NAB		"nab"
+
 // Grab levels.
 #define GRAB_PASSIVE    1
 #define GRAB_AGGRESSIVE 2
@@ -255,8 +258,11 @@
 #define O_RESIN    "resin spinner"
 #define O_AREJECT  "immune hub"
 #define O_VENTC    "morphoplastic node"
+#define O_TRACH    "tracheae"
+#define O_PHORON   "phoron filter"
+#define O_ACETONE  "acetone reactor"
 #define O_VRLINK   "virtual node"
-#define O_ALL list(O_STANDARD, O_MOUTH, O_CELL, O_PLASMA, O_HIVE, O_NUTRIENT, O_STRATA, O_RESPONSE, O_GBLADDER, O_POLYP, O_ANCHOR, O_REGBRUTE, O_REGBURN, O_REGOXY, O_REGTOX, O_ACID, O_EGG, O_RESIN, O_AREJECT, O_VENTC, O_VRLINK)
+#define O_ALL list(O_STANDARD, O_MOUTH, O_CELL, O_PLASMA, O_HIVE, O_NUTRIENT, O_STRATA, O_RESPONSE, O_GBLADDER, O_POLYP, O_ANCHOR, O_REGBRUTE, O_REGBURN, O_REGOXY, O_REGTOX, O_ACID, O_EGG, O_RESIN, O_AREJECT, O_VENTC, O_TRACH, O_PHORON, O_ACETONE, O_VRLINK)
 
 // External organs, aka limbs
 #define BP_L_FOOT "l_foot"
@@ -358,6 +364,8 @@
 #define SPECIES_EVENT1			"X Occursus"
 #define SPECIES_EVENT2			"X Anomalous"
 #define SPECIES_EVENT3			"X Unowas"
+#define SPECIES_NABBER			"Serpentid"
+#define SPECIES_NABBER_MONARCH	"Monarch Serpentid"
 
 // Replicant types. Currently only used for alien pods and events.
 #define SPECIES_REPLICANT		"Replicant"

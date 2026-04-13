@@ -675,7 +675,7 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 	if(!glasses)
 		return //Not wearing glasses, no need to update anything.
 
-	overlays_standing[GLASSES_LAYER] = glasses.get_worn_overlay(wearer = src, body_type = species.get_bodytype(src), slot_name = slot_gloves_str, default_icon = INV_EYES_DEF_ICON, default_layer = GLASSES_LAYER)
+	overlays_standing[GLASSES_LAYER] = glasses.get_worn_overlay(wearer = src, body_type = species.get_bodytype(src), slot_name = slot_glasses_str, default_icon = INV_EYES_DEF_ICON, default_layer = GLASSES_LAYER)
 
 	apply_layer(GLASSES_LAYER)
 
