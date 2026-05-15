@@ -72,7 +72,7 @@ jobs:
           ~/dreamchecker > ${GITHUB_WORKSPACE}/output-annotations.txt 2>&1
 
       - name: Annotate Linter
-        uses: yogstation13/DreamAnnotate@8ef04ef7fbb4ac63ee2daca222af91599e0af5e1
+        uses: yogstation13/DreamAnnotate@67354dcd99fe4f980d9887f04e0109472de0fccb
         if: always()
         with:
           outputFile: output-annotations.txt
